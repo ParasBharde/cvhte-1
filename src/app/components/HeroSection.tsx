@@ -416,7 +416,7 @@ export function HeroSection() {
           marginBottom: '8px',
           animation: 'flickerIn 0.8s ease-out forwards',
         }}>
-          MALGHE ELECTRICALS
+          CVHTE INTELLIGENCE
         </div>
 
         {/* CVHTE system title */}
@@ -429,7 +429,7 @@ export function HeroSection() {
           marginBottom: '40px',
           textShadow: '0 0 20px rgba(0,180,255,0.6)',
         }}>
-          CVHTE SYSTEM
+          ADVANCED SYSTEM DIAGNOSTICS
         </div>
 
         {/* CVHTE Acronym breakdown */}

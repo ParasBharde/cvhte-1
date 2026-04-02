@@ -48,25 +48,44 @@ export function NavBar() {
       }}
     >
       {/* Logo */}
-      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-        <img
-          src="/malghe-logo.png"
-          alt="Malghe Electricals and Engineers logo"
-          style={{
-            height: '44px',
-            width: '44px',
-            objectFit: 'contain',
-            borderRadius: '50%',
-            filter: 'drop-shadow(0 0 6px rgba(41,171,226,0.35))',
-            flexShrink: 0,
+      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+        <div style={{
+          background: '#ffffff',
+          padding: '6px',
+          borderRadius: '6px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 0 20px rgba(255, 255, 255, 0.15)',
+          transition: 'all 0.3s ease',
+          flexShrink: 0,
+        }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'scale(1.04)';
+            e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.3)';
           }}
-        />
-        <div>
-          <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '16px', fontWeight: 700, color: '#00b4ff', lineHeight: 1.1, letterSpacing: '2px' }}>
-            MALGHE
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.15)';
+          }}
+        >
+          <img
+            src="/cvhte-logo.png"
+            alt="CVHTE Logo"
+            style={{
+              height: '44px',
+              width: '44px',
+              objectFit: 'contain',
+              flexShrink: 0,
+            }}
+          />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+          <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '18px', fontWeight: 800, color: '#00b4ff', lineHeight: 1.1, letterSpacing: '3px' }}>
+            CVHTE
           </div>
-          <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '10px', color: '#7ba6c4', letterSpacing: '2px', fontWeight: 500 }}>
-            ELECTRICALS &amp; ENGINEERS
+          <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '10px', color: '#7ba6c4', letterSpacing: '1.5px', fontWeight: 600, textTransform: 'uppercase' }}>
+            System Intelligence
           </div>
         </div>
       </a>

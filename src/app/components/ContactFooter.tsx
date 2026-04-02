@@ -85,7 +85,7 @@ export function ContactFooter() {
             padding: '5px 14px', marginBottom: '20px',
           }}>
             <Zap size={12} color="#00b4ff" fill="#00b4ff" />
-            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>ENGAGE WITH MALGHE ELECTRICALS</span>
+            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>ENGAGE WITH CVHTE INTELLIGENCE</span>
           </div>
           <h2 style={{
             fontFamily: 'Orbitron, sans-serif',
@@ -264,7 +264,7 @@ export function ContactFooter() {
             {/* Contact cards */}
             {[
               { icon: Phone, label: 'CALL US', value: '+91 98765 43210', sub: 'Mon–Sat, 9 AM – 6 PM IST', color: '#00b4ff' },
-              { icon: Mail,  label: 'EMAIL',   value: 'info@malgheelectricals.in', sub: 'Response within 24 hours', color: '#4dd8ff' },
+              { icon: Mail,  label: 'EMAIL',   value: 'info@cvhte.in', sub: 'Response within 24 hours', color: '#4dd8ff' },
               { icon: MapPin,label: 'OFFICE',  value: 'Pune, Maharashtra, India', sub: 'Pan-India site visits available', color: '#00e98c' },
             ].map((c, ci) => {
               const Icon = c.icon;
@@ -364,7 +364,7 @@ export function ContactFooter() {
               color: '#00b4ff', letterSpacing: '3px',
               marginBottom: '4px',
             }}>
-              MALGHE ELECTRICALS
+              CVHTE INTELLIGENCE
             </div>
             <div style={{
               fontFamily: 'Space Grotesk, sans-serif',
@@ -430,7 +430,7 @@ export function ContactFooter() {
             fontFamily: 'Space Grotesk, sans-serif',
             fontSize: '12px', color: '#2a4a64',
           }}>
-            © 2026 Malghe Electricals. All rights reserved. CVHTE is a proprietary electrical diagnostic system.
+            © 2026 CVHTE Intelligence. All rights reserved. CVHTE is a proprietary electrical diagnostic system.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{
