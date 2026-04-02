@@ -38,7 +38,7 @@ export function NavBar() {
     <nav
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        padding: '0 48px',
+        padding: '0 clamp(16px, 4vw, 48px)',
         height: '70px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: scrolled ? 'rgba(2,12,27,0.96)' : 'transparent',

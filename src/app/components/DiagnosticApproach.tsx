@@ -229,10 +229,9 @@ export function DiagnosticApproach() {
       {/* Step detail panel */}
       <div
         key={activeStep}
+        className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr]"
         style={{
           maxWidth: '1000px', margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.4fr)',
           gap: '24px',
           opacity: inView ? 1 : 0,
           transition: 'opacity 0.5s ease',

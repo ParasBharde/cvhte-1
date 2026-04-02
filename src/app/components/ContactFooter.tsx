@@ -159,7 +159,7 @@ export function ContactFooter() {
                   ANALYSIS REQUEST FORM
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                     <label style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '11px', color: '#4a6a84', letterSpacing: '1px', display: 'block', marginBottom: '6px' }}>
                       FULL NAME *

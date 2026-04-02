@@ -311,9 +311,7 @@ export function CurrentAbnormalities() {
       </div>
 
       {/* Waveform display + info */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'minmax(0,1.6fr) minmax(0,1fr)',
+      <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr]" style={{
         gap: '24px',
         maxWidth: '1200px', margin: '0 auto',
         opacity: inView ? 1 : 0,

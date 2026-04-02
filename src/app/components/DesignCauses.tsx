@@ -76,7 +76,7 @@ export function DesignCauses() {
     }
     const st = ScrollTrigger.create({
       trigger: ref.current,
-      start: 'top 70%',
+      start: 'top 10%',
       end: 'bottom 30%',
       scrub: true,
       onEnter: () => setInView(true),
@@ -154,8 +154,8 @@ export function DesignCauses() {
               <div
                 key={cause.number}
                 onClick={() => setActiveCard(activeCard === i ? null : i)}
+                className="flex flex-col md:flex-row gap-6 items-start"
                 style={{
-                  display: 'flex', gap: '24px', alignItems: 'flex-start',
                   opacity: isInView ? 1 : 0,
                   transform: isInView ? 'translateX(0)' : 'translateX(-40px)',
                   transition: `all 0.5s ease ${i * 100}ms`,
