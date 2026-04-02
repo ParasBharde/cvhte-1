@@ -1,0 +1,165 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* ── CVHTE Electrical Global Styles ── */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: #020c1b;
+  color: #e8f4fd;
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+
+
+/* ── Electrical Animations ── */
+
+@keyframes electricPulse {
+  0%, 100% { opacity: 0.4; box-shadow: 0 0 6px #00b4ff; }
+  50%       { opacity: 1;   box-shadow: 0 0 20px #00b4ff, 0 0 40px rgba(0,180,255,0.3); }
+}
+
+@keyframes ambientGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,180,255,0.2); }
+  50%       { box-shadow: 0 0 30px rgba(0,180,255,0.5), 0 0 60px rgba(0,180,255,0.2); }
+}
+
+@keyframes signalTrace {
+  0%   { stroke-dashoffset: 600; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { stroke-dashoffset: 0;   opacity: 1; }
+}
+
+@keyframes powerOn {
+  0%   { opacity: 0; filter: brightness(4) saturate(0); }
+  20%  { opacity: 1; filter: brightness(3) saturate(0.5); }
+  60%  { opacity: 0.9; filter: brightness(1.8) saturate(1); }
+  100% { opacity: 1; filter: brightness(1) saturate(1); }
+}
+
+@keyframes scanDown {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes scrollWheel {
+  0%   { transform: translateY(0); opacity: 1; }
+  50%  { transform: translateY(12px); opacity: 0; }
+  51%  { transform: translateY(-8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.hero-scroll-btn {
+  animation: floatBounce 3s ease-in-out infinite !important;
+}
+
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes flickerIn {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.8; }
+  12%  { opacity: 0.1; }
+  14%  { opacity: 0.9; }
+  20%  { opacity: 0; filter: brightness(2); }
+  22%  { opacity: 1; filter: brightness(1) drop-shadow(0 0 10px #00b4ff); }
+  100% { opacity: 1; }
+}
+
+@keyframes energyFlow {
+  0%   { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: -1000; }
+}
+
+@keyframes pulseBorder {
+  0%, 100% { border-color: rgba(0,180,255,0.2); }
+  50%       { border-color: rgba(0,180,255,0.8); }
+}
+
+@keyframes dataCounter {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes nodeActivate {
+  0%   { r: 3; opacity: 0.3; }
+  50%  { r: 6; opacity: 1; }
+  100% { r: 3; opacity: 0.3; }
+}
+
+/* ── Utility Classes ── */
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.electric-glow {
+  animation: electricPulse 2s ease-in-out infinite;
+}
+
+.power-on {
+  animation: powerOn 0.8s ease-out forwards;
+}
+
+.flicker-in {
+  animation: flickerIn 0.6s ease-out forwards;
+}
+
+.scan-line {
+  animation: scanDown 6s linear infinite;
+}
+
+/* Section connector — the vertical energy spine */
+.energy-spine {
+  position: absolute;
+  left: 48px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, #00b4ff 20%, #00b4ff 80%, transparent);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Circuit grid overlay */
+.circuit-grid {
+  background-image:
+    linear-gradient(rgba(0,180,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Card hover glow */
+.card-electric:hover {
+  border-color: rgba(0,180,255,0.5) !important;
+  box-shadow: 0 0 20px rgba(0,180,255,0.15), inset 0 0 20px rgba(0,180,255,0.03);
+  transform: translateY(-2px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #020c1b; }
+::-webkit-scrollbar-thumb { background: #0a2540; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00b4ff; }
