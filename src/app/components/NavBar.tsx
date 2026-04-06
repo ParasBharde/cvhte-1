@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 
 const NAV_LINKS = [
-  { href: '#breakdowns',   label: 'Breakdowns' },
-  { href: '#symptoms',     label: 'Symptoms' },
-  { href: '#abnormalities',label: 'Abnormalities' },
-  { href: '#diagnostic',   label: 'CVHET Diagnostic' },
-  { href: '#reduction',    label: 'Results' },
-  { href: '#contact',      label: 'Contact' },
+  { href: '/about',        label: 'About CVHET' },
+  { href: '/services',     label: 'Services' },
+  { href: '/#breakdowns',  label: 'Breakdowns' },
+  { href: '/#symptoms',    label: 'Symptoms' },
+  { href: '/#abnormalities',label: 'Abnormalities' },
+  { href: '/#diagnostic',  label: 'CVHET Diagnostic' },
+  { href: '/#reduction',   label: 'Results' },
+  { href: '/#contact',     label: 'Contact' },
 ];
 
 
@@ -16,11 +19,16 @@ export function NavBar() {
   const [scrolled, setScrolled]   = useState(false);
   const [menuOpen, setMenuOpen]   = useState(false);
   const [activeSection, setActive] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      const sections = NAV_LINKS.map(l => l.href.replace('#', ''));
+      
+      // Only track scroll sections on home page
+      if (location.pathname !== '/') return;
+
+      const sections = NAV_LINKS.filter(l => l.href.includes('#')).map(l => l.href.split('#')[1]);
       for (const id of sections.reverse()) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= 120) {
@@ -46,7 +54,7 @@ export function NavBar() {
         transition: 'all 0.4s ease',
       }}
     >
-      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+      <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
         <div style={{
           background: '#ffffff',
           padding: '6px',
@@ -86,16 +94,17 @@ export function NavBar() {
             Electrical Breakdown Expert
           </div>
         </div>
-      </a>
+      </Link>
 
       <div style={{ gap: '28px', alignItems: 'center' }} className="hidden md:flex">
         {NAV_LINKS.map(link => {
-          const id = link.href.replace('#', '');
-          const isActive = activeSection === id;
+          const id = link.href.split('#')[1] || link.href;
+          // check if active by route or by scroll
+          const isActive = (location.pathname === link.href) || (activeSection === id && location.pathname === '/');
           return (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               style={{
                 color: isActive ? '#00b4ff' : '#7ba6c4',
                 textDecoration: 'none',
@@ -117,14 +126,14 @@ export function NavBar() {
                   background: '#00b4ff', boxShadow: '0 0 6px #00b4ff',
                 }} />
               )}
-            </a>
+            </Link>
           );
         })}
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <a
-          href="#contact"
+        <Link
+          to="/#contact"
           style={{
             display: 'flex', alignItems: 'center', gap: '6px',
             background: 'transparent',
@@ -150,7 +159,7 @@ export function NavBar() {
         >
           <Zap size={12} fill="currentColor" />
           ANALYSE
-        </a>
+        </Link>
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           style={{ background: 'none', border: 'none', color: '#7ba6c4', cursor: 'pointer' }}
@@ -169,14 +178,14 @@ export function NavBar() {
           display: 'flex', flexDirection: 'column', gap: '20px',
         }}>
           {NAV_LINKS.map(link => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               onClick={() => setMenuOpen(false)}
               style={{ color: '#7ba6c4', textDecoration: 'none', fontSize: '15px', fontFamily: 'Space Grotesk, sans-serif' }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
       )}

@@ -1,27 +1,11 @@
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { NavBar } from './components/NavBar';
-import { HeroSection } from './components/HeroSection';
+import { LandingPage } from './pages/LandingPage';
+import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
 
-const ElectricalBreakdowns = lazy(() => import('./components/ElectricalBreakdowns').then(m => ({ default: m.ElectricalBreakdowns })));
-const SymptomsSection = lazy(() => import('./components/SymptomsSection').then(m => ({ default: m.SymptomsSection })));
-const CurrentAbnormalities = lazy(() => import('./components/CurrentAbnormalities').then(m => ({ default: m.CurrentAbnormalities })));
-const DesignCauses = lazy(() => import('./components/DesignCauses').then(m => ({ default: m.DesignCauses })));
-const ProtectionWeaknesses = lazy(() => import('./components/ProtectionWeaknesses').then(m => ({ default: m.ProtectionWeaknesses })));
-const DiagnosticApproach = lazy(() => import('./components/DiagnosticApproach').then(m => ({ default: m.DiagnosticApproach })));
-const ProtectionCoordination = lazy(() => import('./components/ProtectionCoordination').then(m => ({ default: m.ProtectionCoordination })));
-const ReductionSection = lazy(() => import('./components/ReductionSection').then(m => ({ default: m.ReductionSection })));
-const ContactFooter = lazy(() => import('./components/ContactFooter').then(m => ({ default: m.ContactFooter })));
-
-
-function SectionSkeleton() {
-  return (
-    <div style={{
-      minHeight: '400px',
-      background: 'linear-gradient(180deg, rgba(0,180,255,0.03) 0%, transparent 100%)',
-      borderTop: '1px solid rgba(0,180,255,0.06)',
-    }} />
-  );
-}
 
 function ScrollEnergyFlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -283,24 +267,21 @@ function ArcBackground() {
 }
 
 export default function App() {
+  const location = useLocation();
+  
   return (
-    <div style={{ background: '#020c1b', color: '#e8f4fd', overflowX: 'hidden' }}>
+    <div style={{ background: '#020c1b', color: '#e8f4fd', overflowX: 'hidden', minHeight: '100vh' }}>
       <ScrollEnergyFlow />
       <ArcBackground />
       <div style={{ position: 'relative', zIndex: 1 }}>
         <NavBar />
-        <HeroSection />
-        <Suspense fallback={<SectionSkeleton />}>
-          <ElectricalBreakdowns />
-          <SymptomsSection />
-          <CurrentAbnormalities />
-          <DesignCauses />
-          <ProtectionWeaknesses />
-          <DiagnosticApproach />
-          <ProtectionCoordination />
-          <ReductionSection />
-          <ContactFooter />
-        </Suspense>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+          </Routes>
+        </AnimatePresence>
       </div>
     </div>
   );
