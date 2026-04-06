@@ -29,8 +29,7 @@ const WAVEFORM_TYPES = [
     risk: 90,
     draw: (x: number, t: number, w: number, _h: number) => {
       const norm = (x / w) * Math.PI * 6;
-      const raw = Math.sin(norm + t) * 1.85;
-      return Math.max(-1, Math.min(1, raw)); // clipped — represents saturation
+      return Math.sin(norm + t) * 1.35;
     },
   },
   {
@@ -43,10 +42,10 @@ const WAVEFORM_TYPES = [
     draw: (x: number, t: number, w: number, _h: number) => {
       const norm = (x / w) * Math.PI * 6;
       return (
-        0.6 * Math.sin(norm + t) +
-        0.28 * Math.sin(3 * norm + t) +
-        0.14 * Math.sin(5 * norm + t) +
-        0.07 * Math.sin(7 * norm + t)
+        0.6 * Math.sin(norm - t) +
+        0.28 * Math.sin(3 * norm - t) +
+        0.14 * Math.sin(5 * norm - t) +
+        0.07 * Math.sin(7 * norm - t)
       );
     },
   },
@@ -106,12 +105,10 @@ function WaveformCanvas({ typeId, color, draw }: {
       rafRef.current = requestAnimationFrame(render);
       t += 0.04;
 
-      // Clear
       ctx.clearRect(0, 0, W, H);
       ctx.fillStyle = '#020c1b';
       ctx.fillRect(0, 0, W, H);
 
-      // Grid lines
       ctx.strokeStyle = 'rgba(0,180,255,0.06)';
       ctx.lineWidth = 1;
       for (let gx = 0; gx <= W; gx += W / 8) {
@@ -121,17 +118,14 @@ function WaveformCanvas({ typeId, color, draw }: {
         ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
       }
 
-      // Centre line
       ctx.strokeStyle = 'rgba(0,180,255,0.15)';
       ctx.setLineDash([4, 6]);
       ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
       ctx.setLineDash([]);
 
-      // Glow shadow
       ctx.shadowBlur  = 14;
       ctx.shadowColor = color;
 
-      // Waveform path
       ctx.strokeStyle = color;
       ctx.lineWidth   = 2.5;
       ctx.beginPath();
@@ -144,7 +138,6 @@ function WaveformCanvas({ typeId, color, draw }: {
       ctx.stroke();
       ctx.shadowBlur = 0;
 
-      // Ghost trail (faint previous cycle)
       ctx.strokeStyle = color + '28';
       ctx.lineWidth   = 1.2;
       ctx.beginPath();
@@ -156,7 +149,6 @@ function WaveformCanvas({ typeId, color, draw }: {
       }
       ctx.stroke();
 
-      // Moving cursor (represents measurement probe)
       const cursorX = ((t * 30) % W);
       ctx.fillStyle = color;
       ctx.shadowBlur = 10;
@@ -246,7 +238,6 @@ export function CurrentAbnormalities() {
         position: 'relative',
       }}
     >
-      {/* Section header */}
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -274,12 +265,11 @@ export function CurrentAbnormalities() {
           color: '#7ba6c4', lineHeight: 1.7,
         }}>
           Each abnormality leaves a unique signature on the electrical waveform.
-          CVHTE monitoring detects these patterns in real time before they escalate to failures.
+          CVHET monitoring detects these patterns in real time before they escalate to failures.
         </p>
       </div>
 
       <div ref={pinRef} style={{ width: '100%', position: 'relative' }}>
-        {/* Tab selector */}
         <div style={{
           display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center',
           marginBottom: '40px',
@@ -310,7 +300,6 @@ export function CurrentAbnormalities() {
         })}
       </div>
 
-      {/* Waveform display + info */}
       <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr]" style={{
         gap: '24px',
         maxWidth: '1200px', margin: '0 auto',
@@ -318,7 +307,6 @@ export function CurrentAbnormalities() {
         transition: 'opacity 0.6s ease',
       }}>
 
-        {/* Canvas display */}
         <div style={{
           background: '#051a2e',
           border: `1px solid ${active.color}30`,
@@ -326,7 +314,6 @@ export function CurrentAbnormalities() {
           padding: '24px',
           transition: 'border-color 0.3s, box-shadow 0.3s',
         }}>
-          {/* Canvas label */}
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             marginBottom: '16px',
@@ -347,7 +334,6 @@ export function CurrentAbnormalities() {
             </span>
           </div>
 
-          {/* The canvas */}
           <div style={{ height: '220px', position: 'relative' }}>
             <WaveformCanvas
               key={active.id}
@@ -357,13 +343,11 @@ export function CurrentAbnormalities() {
             />
           </div>
 
-          {/* Risk meter */}
           <div style={{ marginTop: '20px' }}>
             <RiskMeter key={active.id} risk={active.risk} color={active.color} />
           </div>
         </div>
 
-        {/* Info panel */}
         <div style={{
           background: '#051a2e',
           border: '1px solid rgba(0,180,255,0.1)',
@@ -385,21 +369,20 @@ export function CurrentAbnormalities() {
             </p>
           </div>
 
-          {/* CVHTE parameter that catches this */}
           <div style={{ borderTop: '1px solid rgba(0,180,255,0.08)', paddingTop: '24px' }}>
             <div style={{
               fontFamily: 'Orbitron, sans-serif', fontSize: '11px',
               color: '#4a6a84', letterSpacing: '2px', marginBottom: '14px',
             }}>
-              CVHTE DETECTION PARAMETER
+              CVHET DETECTION PARAMETER
             </div>
-            {['C – Current', 'V – Voltage', 'H – Harmonics', 'T – Temperature', 'E – Earthing'].map((param, pi) => {
+            {['C – Current', 'V – Voltage', 'H – Harmonics', 'E – Earthing', 'T – Temperature'].map((param, pi) => {
               const relevance =
-                active.id === 'overcurrent'  ? [1, 0, 0, 1, 0] :
-                active.id === 'harmonic'     ? [1, 1, 1, 1, 0] :
-                active.id === 'imbalance'    ? [1, 1, 0, 1, 0] :
-                active.id === 'leakage'      ? [1, 0, 0, 0, 1] :
-                [1, 1, 1, 1, 1]; // normal — all monitored
+                active.id === 'overcurrent'  ? [1, 0, 0, 0, 1] :
+                active.id === 'harmonic'     ? [1, 1, 1, 0, 1] :
+                active.id === 'imbalance'    ? [1, 1, 0, 0, 1] :
+                active.id === 'leakage'      ? [1, 0, 0, 1, 0] :
+                [1, 1, 1, 1, 1];
               const isRelevant = relevance[pi] === 1;
               return (
                 <div key={param} style={{
@@ -443,7 +426,6 @@ export function CurrentAbnormalities() {
       </div>
       </div>
 
-      {/* Connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,180,255,0.4), transparent)' }} />
       </div>

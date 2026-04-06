@@ -5,7 +5,7 @@ const NAV_LINKS = [
   { href: '#breakdowns',   label: 'Breakdowns' },
   { href: '#symptoms',     label: 'Symptoms' },
   { href: '#abnormalities',label: 'Abnormalities' },
-  { href: '#diagnostic',   label: 'CVHTE Diagnostic' },
+  { href: '#diagnostic',   label: 'CVHET Diagnostic' },
   { href: '#reduction',    label: 'Results' },
   { href: '#contact',      label: 'Contact' },
 ];
@@ -20,7 +20,6 @@ export function NavBar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      // Update active section
       const sections = NAV_LINKS.map(l => l.href.replace('#', ''));
       for (const id of sections.reverse()) {
         const el = document.getElementById(id);
@@ -47,7 +46,6 @@ export function NavBar() {
         transition: 'all 0.4s ease',
       }}
     >
-      {/* Logo */}
       <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
         <div style={{
           background: '#ffffff',
@@ -70,8 +68,8 @@ export function NavBar() {
           }}
         >
           <img
-            src="/cvhte-logo.png"
-            alt="CVHTE Logo"
+            src="/CVHET-1.png"
+            alt="CVHET Logo"
             style={{
               height: '44px',
               width: '44px',
@@ -82,15 +80,14 @@ export function NavBar() {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
           <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '18px', fontWeight: 800, color: '#00b4ff', lineHeight: 1.1, letterSpacing: '3px' }}>
-            CVHTE
+            CVHET
           </div>
           <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '10px', color: '#7ba6c4', letterSpacing: '1.5px', fontWeight: 600, textTransform: 'uppercase' }}>
-            System Intelligence
+            Electrical Breakdown Expert
           </div>
         </div>
       </a>
 
-      {/* Desktop Nav */}
       <div style={{ gap: '28px', alignItems: 'center' }} className="hidden md:flex">
         {NAV_LINKS.map(link => {
           const id = link.href.replace('#', '');
@@ -125,7 +122,6 @@ export function NavBar() {
         })}
       </div>
 
-      {/* CTA + Menu */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <a
           href="#contact"
@@ -164,7 +160,6 @@ export function NavBar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div style={{
           position: 'absolute', top: '70px', left: 0, right: 0,

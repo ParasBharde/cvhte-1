@@ -19,7 +19,7 @@ const BENEFITS = [
   {
     icon: Clock,
     title: '60% Faster Fault Detection',
-    desc: 'Real-time CVHTE parameter monitoring detects pre-fault conditions and triggers alarms before the fault develops — cutting mean-time-to-repair significantly.',
+    desc: 'Real-time CVHET parameter monitoring detects pre-fault conditions and triggers alarms before the fault develops — cutting mean-time-to-repair significantly.',
     metric: '60%',
     metricLabel: 'Reduction in MTTR',
     color: '#4dd8ff',
@@ -51,14 +51,13 @@ const BENEFITS = [
   {
     icon: Wrench,
     title: 'Reduced Maintenance Costs',
-    desc: 'Condition-based maintenance informed by CVHTE data replaces costly time-based schedules — directing resources only where and when they are needed.',
+    desc: 'Condition-based maintenance informed by CVHET data replaces costly time-based schedules — directing resources only where and when they are needed.',
     metric: '45%',
     metricLabel: 'Maintenance cost reduction',
     color: '#fb923c',
   },
 ];
 
-// Simple animated shield with radial glow
 function ShieldGlow({ color }: { color: string }) {
   return (
     <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
@@ -83,7 +82,6 @@ function ShieldGlow({ color }: { color: string }) {
         strokeWidth="0.8"
         opacity="0.4"
       />
-      {/* Lightning bolt */}
       <path d="M54 24 L46 42 L52 42 L44 58 L58 40 L52 40 Z" fill={color} opacity="0.7" />
     </svg>
   );
@@ -117,7 +115,6 @@ export function ProtectionCoordination() {
         position: 'relative',
       }}
     >
-      {/* Radial glow background */}
       <div style={{
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)',
@@ -126,7 +123,6 @@ export function ProtectionCoordination() {
         pointerEvents: 'none',
       }} />
 
-      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '70px', position: 'relative' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -153,12 +149,11 @@ export function ProtectionCoordination() {
           fontSize: 'clamp(14px, 1.6vw, 16px)',
           color: '#7ba6c4', lineHeight: 1.7,
         }}>
-          When CVHTE data informs a proper protection coordination study, every layer of the
+          When CVHET data informs a proper protection coordination study, every layer of the
           electrical system improves simultaneously — from safety to economics.
         </p>
       </div>
 
-      {/* Central shield visual */}
       <div style={{
         display: 'flex', justifyContent: 'center',
         marginBottom: '56px',
@@ -177,14 +172,13 @@ export function ProtectionCoordination() {
               fontSize: '11px', fontWeight: 700,
               color: '#00b4ff', letterSpacing: '1px', textAlign: 'center',
             }}>
-              CVHTE<br />
+              CVHET<br />
               <span style={{ fontSize: '9px', color: '#4dd8ff' }}>PROTECTED</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Benefits grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -213,7 +207,6 @@ export function ProtectionCoordination() {
                 position: 'relative', overflow: 'hidden',
               }}
             >
-              {/* Icon */}
               <div style={{ flexShrink: 0 }}>
                 <div style={{
                   width: '44px', height: '44px',
@@ -227,7 +220,6 @@ export function ProtectionCoordination() {
                 </div>
               </div>
 
-              {/* Content */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap', marginBottom: '8px' }}>
                   <h3 style={{
@@ -266,7 +258,6 @@ export function ProtectionCoordination() {
                 </p>
               </div>
 
-              {/* Left accent bar */}
               <div style={{
                 position: 'absolute', left: 0, top: '15%', bottom: '15%', width: '2px',
                 background: `linear-gradient(to bottom, transparent, ${b.color}, transparent)`,
@@ -279,7 +270,6 @@ export function ProtectionCoordination() {
         })}
       </div>
 
-      {/* Connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,180,255,0.4), transparent)' }} />
       </div>

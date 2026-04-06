@@ -98,14 +98,12 @@ export function DesignCauses() {
         position: 'relative',
       }}
     >
-      {/* Decorative right line */}
       <div style={{
         position: 'absolute', right: '40px', top: 0, bottom: 0, width: '1px',
         background: 'linear-gradient(to bottom, transparent, rgba(255,159,10,0.2) 30%, rgba(255,159,10,0.2) 70%, transparent)',
         pointerEvents: 'none',
       }} />
 
-      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '70px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -133,14 +131,12 @@ export function DesignCauses() {
           color: '#7ba6c4', lineHeight: 1.7,
         }}>
           Most electrical breakdowns are not operational accidents — they are engineered in during the
-          design phase through oversights that CVHTE analysis systematically exposes.
+          design phase through oversights that CVHET analysis systematically exposes.
         </p>
       </div>
 
-      {/* Causes list with timeline connector */}
       <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
 
-        {/* Vertical spine */}
         <div style={{
           position: 'absolute', left: '32px', top: '20px', bottom: '20px', width: '2px',
           background: 'linear-gradient(to bottom, rgba(0,180,255,0.4), rgba(168,85,247,0.3))',
@@ -162,7 +158,6 @@ export function DesignCauses() {
                   cursor: 'pointer',
                 }}
               >
-                {/* Number badge */}
                 <div style={{
                   flexShrink: 0,
                   width: '64px', height: '64px',
@@ -183,7 +178,6 @@ export function DesignCauses() {
                   </span>
                 </div>
 
-                {/* Content card */}
                 <div style={{
                   flex: 1,
                   background: isActive ? '#0a2540' : '#051a2e',
@@ -192,7 +186,6 @@ export function DesignCauses() {
                   transition: 'all 0.3s ease',
                   boxShadow: isActive ? `0 0 24px ${cause.color}15` : 'none',
                 }}>
-                  {/* Title row */}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: isActive ? '16px' : '0' }}>
                     <h3 style={{
                       fontFamily: 'Orbitron, sans-serif',
@@ -219,7 +212,6 @@ export function DesignCauses() {
                     </div>
                   </div>
 
-                  {/* Severity bar */}
                   <div style={{ height: '3px', background: 'rgba(255,255,255,0.04)', marginBottom: isActive ? '16px' : '0', marginTop: '12px' }}>
                     <div style={{
                       height: '100%',
@@ -230,7 +222,6 @@ export function DesignCauses() {
                     }} />
                   </div>
 
-                  {/* Expanded detail */}
                   <div style={{
                     overflow: 'hidden',
                     maxHeight: isActive ? '200px' : '0',
@@ -264,7 +255,6 @@ export function DesignCauses() {
         </div>
       </div>
 
-      {/* Connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(168,85,247,0.4), transparent)' }} />
       </div>

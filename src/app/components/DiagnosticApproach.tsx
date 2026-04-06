@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const isDesktop = () => window.innerWidth >= 768;
 
-const CVHTE_STEPS = [
+const CVHET_STEPS = [
   {
     letter: 'C',
     parameter: 'Current',
@@ -33,14 +33,6 @@ const CVHTE_STEPS = [
     insight: 'Identifies harmonic injection sources and quantifies their impact on transformers, neutral conductors, and protective relays.',
   },
   {
-    letter: 'T',
-    parameter: 'Temperature',
-    color: '#ff6b6b',
-    measurements: ['Infrared thermal imaging of switchgear', 'Cable termination and joint temperature', 'Transformer winding temperature tracking', 'Motor bearing and stator thermal monitoring', 'Bus bar and connection hot spot detection'],
-    tools: 'FLIR thermal cameras, PT100 sensors, thermocouple loggers',
-    insight: 'Exposes thermal anomalies indicating loose connections, overloaded conductors, or impending insulation failure.',
-  },
-  {
     letter: 'E',
     parameter: 'Earthing',
     color: '#00e98c',
@@ -48,9 +40,16 @@ const CVHTE_STEPS = [
     tools: 'Fall-of-potential method, earth testers, loop impedance testers',
     insight: 'Validates the earthing system integrity — the last line of defence against electric shock and equipment damage during fault conditions.',
   },
+  {
+    letter: 'T',
+    parameter: 'Temperature',
+    color: '#ff6b6b',
+    measurements: ['Infrared thermal imaging of switchgear', 'Cable termination and joint temperature', 'Transformer winding temperature tracking', 'Motor bearing and stator thermal monitoring', 'Bus bar and connection hot spot detection'],
+    tools: 'FLIR thermal cameras, PT100 sensors, thermocouple loggers',
+    insight: 'Exposes thermal anomalies indicating loose connections, overloaded conductors, or impending insulation failure.',
+  },
 ];
 
-// Animated path connector between steps
 function StepConnector({ color1, color2, active }: { color1: string; color2: string; active: boolean }) {
   return (
     <div style={{
@@ -102,17 +101,15 @@ export function DiagnosticApproach() {
       scrub: 1,
       onEnter: () => setInView(true),
       onUpdate: (self) => {
-        const idx = Math.floor(self.progress * CVHTE_STEPS.length);
-        setActiveStep(Math.min(idx, CVHTE_STEPS.length - 1));
+        const idx = Math.floor(self.progress * CVHET_STEPS.length);
+        setActiveStep(Math.min(idx, CVHET_STEPS.length - 1));
       }
     });
     return () => st.kill();
   }, []);
 
-  // Cycle mode is now disabled permanently since scroll dictates the active step.
-  // We keep the state signature intact if it's used elsewhere, but just mock the effect.
 
-  const step = CVHTE_STEPS[activeStep];
+  const step = CVHET_STEPS[activeStep];
 
   return (
     <section
@@ -124,7 +121,6 @@ export function DiagnosticApproach() {
         position: 'relative',
       }}
     >
-      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '70px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -142,7 +138,7 @@ export function DiagnosticApproach() {
           letterSpacing: '2px',
           marginBottom: '16px',
         }}>
-          CVHTE DIAGNOSTIC<br />
+          CVHET DIAGNOSTIC<br />
           <span style={{ color: '#00e98c' }}>& ANALYTICAL APPROACH</span>
         </h2>
         <p style={{
@@ -157,7 +153,6 @@ export function DiagnosticApproach() {
       </div>
 
       <div ref={pinRef} style={{ width: '100%', position: 'relative' }}>
-        {/* CVHTE Step Navigator */}
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexWrap: 'wrap', gap: '0',
@@ -165,12 +160,11 @@ export function DiagnosticApproach() {
         opacity: inView ? 1 : 0,
         transition: 'opacity 0.6s ease',
       }}>
-        {CVHTE_STEPS.map((s, i) => {
+        {CVHET_STEPS.map((s, i) => {
           const isActive = activeStep === i;
           const isPast   = i < activeStep;
           return (
             <div key={s.letter} style={{ display: 'flex', alignItems: 'center' }}>
-              {/* Step node */}
               <button
                 onClick={() => { setActiveStep(i); setCycleMode(false); }}
                 style={{
@@ -197,13 +191,12 @@ export function DiagnosticApproach() {
                 </span>
               </button>
 
-              {/* Connector to next step */}
-              {i < CVHTE_STEPS.length - 1 && (
+              {i < CVHET_STEPS.length - 1 && (
                 <div style={{
                   width: 'clamp(24px, 4vw, 60px)',
                   height: '2px',
                   background: i < activeStep
-                    ? `linear-gradient(90deg, ${s.color}, ${CVHTE_STEPS[i + 1].color})`
+                    ? `linear-gradient(90deg, ${s.color}, ${CVHET_STEPS[i + 1].color})`
                     : 'rgba(0,180,255,0.08)',
                   position: 'relative',
                   transition: 'background 0.4s',
@@ -213,9 +206,9 @@ export function DiagnosticApproach() {
                     <div style={{
                       position: 'absolute', top: '-3px', right: 0,
                       width: '8px', height: '8px',
-                      background: CVHTE_STEPS[i + 1].color,
+                      background: CVHET_STEPS[i + 1].color,
                       borderRadius: '50%',
-                      boxShadow: `0 0 8px ${CVHTE_STEPS[i + 1].color}`,
+                      boxShadow: `0 0 8px ${CVHET_STEPS[i + 1].color}`,
                       animation: 'electricPulse 1.5s ease-in-out infinite',
                     }} />
                   )}
@@ -226,7 +219,6 @@ export function DiagnosticApproach() {
         })}
       </div>
 
-      {/* Step detail panel */}
       <div
         key={activeStep}
         className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr]"
@@ -237,14 +229,12 @@ export function DiagnosticApproach() {
           transition: 'opacity 0.5s ease',
         }}
       >
-        {/* Left — parameter info */}
         <div style={{
           background: '#051a2e',
           border: `1px solid ${step.color}30`,
           padding: '36px',
           boxShadow: `0 0 40px ${step.color}15`,
         }}>
-          {/* Letter large */}
           <div style={{
             fontFamily: 'Orbitron, sans-serif',
             fontSize: 'clamp(64px, 8vw, 100px)',
@@ -293,7 +283,6 @@ export function DiagnosticApproach() {
           </div>
         </div>
 
-        {/* Right — measurement list */}
         <div style={{
           background: '#051a2e',
           border: '1px solid rgba(0,180,255,0.1)',
@@ -321,7 +310,6 @@ export function DiagnosticApproach() {
                   transition: `all 0.4s ease ${mi * 80}ms`,
                 }}
               >
-                {/* Step number indicator */}
                 <div style={{
                   flexShrink: 0,
                   width: '28px', height: '28px',
@@ -347,12 +335,11 @@ export function DiagnosticApproach() {
             ))}
           </div>
 
-          {/* Step indicator */}
           <div style={{
             marginTop: '24px',
             display: 'flex', alignItems: 'center', gap: '8px',
           }}>
-            {CVHTE_STEPS.map((_, si) => (
+            {CVHET_STEPS.map((_, si) => (
               <div
                 key={si}
                 style={{
@@ -369,14 +356,13 @@ export function DiagnosticApproach() {
               fontSize: '11px', color: '#4a6a84', marginLeft: '4px',
               whiteSpace: 'nowrap',
             }}>
-              {activeStep + 1} / {CVHTE_STEPS.length}
+              {activeStep + 1} / {CVHET_STEPS.length}
             </span>
           </div>
         </div>
       </div>
       </div>
 
-      {/* Connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,233,140,0.4), transparent)' }} />
       </div>

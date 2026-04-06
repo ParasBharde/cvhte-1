@@ -1,19 +1,18 @@
 import { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import { NavBar }       from './components/NavBar';
-import { HeroSection }  from './components/HeroSection';
+import { NavBar } from './components/NavBar';
+import { HeroSection } from './components/HeroSection';
 
-// Below-fold sections are lazy-loaded to reduce initial bundle on mobile
-const ElectricalBreakdowns   = lazy(() => import('./components/ElectricalBreakdowns').then(m => ({ default: m.ElectricalBreakdowns })));
-const SymptomsSection        = lazy(() => import('./components/SymptomsSection').then(m => ({ default: m.SymptomsSection })));
-const CurrentAbnormalities   = lazy(() => import('./components/CurrentAbnormalities').then(m => ({ default: m.CurrentAbnormalities })));
-const DesignCauses           = lazy(() => import('./components/DesignCauses').then(m => ({ default: m.DesignCauses })));
-const ProtectionWeaknesses   = lazy(() => import('./components/ProtectionWeaknesses').then(m => ({ default: m.ProtectionWeaknesses })));
-const DiagnosticApproach     = lazy(() => import('./components/DiagnosticApproach').then(m => ({ default: m.DiagnosticApproach })));
+const ElectricalBreakdowns = lazy(() => import('./components/ElectricalBreakdowns').then(m => ({ default: m.ElectricalBreakdowns })));
+const SymptomsSection = lazy(() => import('./components/SymptomsSection').then(m => ({ default: m.SymptomsSection })));
+const CurrentAbnormalities = lazy(() => import('./components/CurrentAbnormalities').then(m => ({ default: m.CurrentAbnormalities })));
+const DesignCauses = lazy(() => import('./components/DesignCauses').then(m => ({ default: m.DesignCauses })));
+const ProtectionWeaknesses = lazy(() => import('./components/ProtectionWeaknesses').then(m => ({ default: m.ProtectionWeaknesses })));
+const DiagnosticApproach = lazy(() => import('./components/DiagnosticApproach').then(m => ({ default: m.DiagnosticApproach })));
 const ProtectionCoordination = lazy(() => import('./components/ProtectionCoordination').then(m => ({ default: m.ProtectionCoordination })));
-const ReductionSection       = lazy(() => import('./components/ReductionSection').then(m => ({ default: m.ReductionSection })));
-const ContactFooter          = lazy(() => import('./components/ContactFooter').then(m => ({ default: m.ContactFooter })));
+const ReductionSection = lazy(() => import('./components/ReductionSection').then(m => ({ default: m.ReductionSection })));
+const ContactFooter = lazy(() => import('./components/ContactFooter').then(m => ({ default: m.ContactFooter })));
 
-/** Skeleton shown while a lazy section is being fetched */
+
 function SectionSkeleton() {
   return (
     <div style={{
@@ -24,9 +23,6 @@ function SectionSkeleton() {
   );
 }
 
-// ── Dynamic Scroll Energy Flow ──────────────────────────────────────────────────
-// Fixed full-page Canvas drawing active electrical flow on screen edges.
-// Current changes state safely based on scroll position (Normal -> Short Circuit -> Processing -> Healthy)
 function ScrollEnergyFlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
@@ -69,7 +65,7 @@ function ScrollEnergyFlow() {
       }
       update() {
         this.x += this.vx; this.y += this.vy; this.life++;
-        this.vy += 0.2; // slight gravity
+        this.vy += 0.2;
       }
       draw(c: CanvasRenderingContext2D) {
         c.fillStyle = this.color;
@@ -87,36 +83,31 @@ function ScrollEnergyFlow() {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Map scroll progress to electrical states
       let color = '#00b4ff';
       let mode = 'flow';
       let amplitude = 4;
 
       if (scrollRatio < 0.15) {
-        // Hero: Blue, normal grid flow
         color = '#00b4ff';
         mode = 'flow';
       } else if (scrollRatio >= 0.15 && scrollRatio < 0.55) {
-        // Breakdowns/Symptoms/Causes: Red, short circuit, wild sparks
         color = '#ff3355';
         mode = 'short_circuit';
-        amplitude = 20; 
+        amplitude = 8;
       } else if (scrollRatio >= 0.55 && scrollRatio < 0.75) {
-        // Diagnostic/Coordination: Purple, processing pulse
         color = '#a855f7';
         mode = 'pulse';
         amplitude = 12;
       } else {
-        // Reduction/Footer: Green, perfectly smooth and corrected 
         color = '#00e98c';
         mode = 'perfect';
-        amplitude = 2; 
+        amplitude = 2;
       }
 
       const drawLightning = (baseX: number, reversePhase: boolean) => {
         ctx.beginPath();
         ctx.strokeStyle = color;
-        ctx.lineWidth = mode === 'short_circuit' ? 2 + Math.random() * 2 : 2;
+        ctx.lineWidth = mode === 'short_circuit' ? 1 + Math.random() * 1 : 1;
         ctx.shadowColor = color;
         ctx.shadowBlur = mode === 'short_circuit' ? 20 : 12;
 
@@ -134,21 +125,16 @@ function ScrollEnergyFlow() {
           const phase = reversePhase ? -time : time;
 
           if (mode === 'short_circuit') {
-            // Erratic jagged path
-            targetX += (Math.random() - 0.5) * amplitude * 2;
-            
-            // Random sparks flying off
-            if (Math.random() < 0.1) {
-              sparks.push(new Spark(targetX, targetY, color, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8));
+            targetX += (Math.random() - 0.5) * amplitude * 1;
+
+            if (Math.random() < 0.005) {
+              sparks.push(new Spark(targetX, targetY, color, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4));
             }
           } else if (mode === 'pulse') {
-            // Squarish / stepped waveform
             targetX += Math.sin(phase * 4 + i * 0.8) > 0 ? amplitude : -amplitude;
           } else if (mode === 'perfect') {
-            // Tight, perfectly uniform sine wave
             targetX += Math.sin(phase * 8 + i * 0.4) * amplitude;
           } else {
-            // Standard drift
             targetX += Math.sin(phase * 2 + i * 0.2) * amplitude;
           }
 
@@ -159,17 +145,10 @@ function ScrollEnergyFlow() {
         ctx.shadowBlur = 0;
       };
 
-      // Draw dual vertical beams (left and right edges)
       drawLightning(20, false);
       drawLightning(width - 20, true);
 
-      // Extra short circuit flashes
-      if (mode === 'short_circuit' && Math.random() < 0.05) {
-        ctx.fillStyle = `rgba(255, 51, 85, ${Math.random() * 0.15})`;
-        ctx.fillRect(0, 0, width, height); // faint red flash covering screen
-      }
 
-      // Draw sparks
       for (let i = sparks.length - 1; i >= 0; i--) {
         const s = sparks[i];
         s.update();
@@ -193,15 +172,12 @@ function ScrollEnergyFlow() {
       style={{
         position: 'fixed', inset: 0,
         width: '100vw', height: '100vh',
-        zIndex: 9999, pointerEvents: 'none', // Sits on top of everything
+        zIndex: 9999, pointerEvents: 'none',
       }}
     />
   );
 }
 
-// ── Arc Background Canvas ────────────────────────────────────────────────────
-// Fixed full-page Canvas-2D electrical arc network, subtly reacts to scroll.
-// Throttled to ~24fps, skipped on mobile for Lighthouse.
 function ArcBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
@@ -214,18 +190,17 @@ function ArcBackground() {
     if (!ctx) return;
 
     const resize = () => {
-      canvas.width  = window.innerWidth;
+      canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     resize();
     window.addEventListener('resize', resize);
 
-    // Build static node network once
     const NODE_COUNT = 28;
     type Node = { x: number; y: number; vx: number; vy: number };
     const nodes: Node[] = Array.from({ length: NODE_COUNT }, () => ({
-      x:  Math.random() * window.innerWidth,
-      y:  Math.random() * window.innerHeight,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
       vx: (Math.random() - 0.5) * 0.18,
       vy: (Math.random() - 0.5) * 0.18,
     }));
@@ -249,10 +224,8 @@ function ArcBackground() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Drift nodes, bounce off edges
       const w = canvas.width, h = canvas.height;
       for (const n of nodes) {
-        // Scroll shifts nodes slowly downward
         n.x += n.vx + scrollRatio * 0.3;
         n.y += n.vy + scrollRatio * 0.15;
         if (n.x < 0) n.x = w;
@@ -262,7 +235,6 @@ function ArcBackground() {
       }
 
       const MAX_DIST = 260;
-      // Draw connections
       for (let i = 0; i < NODE_COUNT; i++) {
         for (let j = i + 1; j < NODE_COUNT; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -280,7 +252,6 @@ function ArcBackground() {
         }
       }
 
-      // Draw nodes
       for (const n of nodes) {
         ctx.beginPath();
         ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
@@ -316,7 +287,6 @@ export default function App() {
     <div style={{ background: '#020c1b', color: '#e8f4fd', overflowX: 'hidden' }}>
       <ScrollEnergyFlow />
       <ArcBackground />
-      {/* All sections sit above the arc canvas via z-index */}
       <div style={{ position: 'relative', zIndex: 1 }}>
         <NavBar />
         <HeroSection />

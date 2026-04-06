@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const isDesktop = () => window.innerWidth >= 768;
 
-// Cracked shield SVG
 function CrackedShield({ color }: { color: string }) {
   return (
     <svg width="56" height="60" viewBox="0 0 56 60" fill="none">
@@ -18,7 +17,6 @@ function CrackedShield({ color }: { color: string }) {
         strokeWidth="1.5"
         opacity="0.7"
       />
-      {/* Cracks */}
       <path d="M28 15 L24 25 L30 28 L26 40" stroke={color} strokeWidth="1" opacity="0.5" />
       <path d="M35 20 L32 28" stroke={color} strokeWidth="0.8" opacity="0.4" />
       <path d="M22 30 L18 36" stroke={color} strokeWidth="0.8" opacity="0.4" />
@@ -65,7 +63,7 @@ const WEAKNESSES = [
     subtitle: 'Invisible parameter deviations',
     color: '#a855f7',
     description:
-      'Without continuous CVHTE monitoring, sub-threshold degradation in current, voltage, harmonics, temperature, and earthing resistance goes undetected until equipment fails catastrophically.',
+      'Without continuous CVHET monitoring, sub-threshold degradation in current, voltage, harmonics, temperature, and earthing resistance goes undetected until equipment fails catastrophically.',
     impact: 'Faults develop over weeks undetected',
     metric: '80%',
     metricLabel: 'Of faults give pre-failure signals',
@@ -121,7 +119,6 @@ export function ProtectionWeaknesses() {
         position: 'relative',
       }}
     >
-      {/* Background warning grid */}
       <div style={{
         position: 'absolute', inset: 0,
         backgroundImage: 'radial-gradient(rgba(255,51,85,0.02) 1px, transparent 1px)',
@@ -129,7 +126,6 @@ export function ProtectionWeaknesses() {
         pointerEvents: 'none',
       }} />
 
-      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '70px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -161,7 +157,6 @@ export function ProtectionWeaknesses() {
         </p>
       </div>
 
-      {/* Weakness cards */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -189,7 +184,6 @@ export function ProtectionWeaknesses() {
                 position: 'relative', overflow: 'hidden',
               }}
             >
-              {/* Background cracked shield */}
               <div style={{
                 position: 'absolute', top: '16px', right: '16px', opacity: isHov ? 0.4 : 0.15,
                 transition: 'opacity 0.4s',
@@ -197,7 +191,6 @@ export function ProtectionWeaknesses() {
                 <CrackedShield color={w.color} />
               </div>
 
-              {/* Icon + metric row */}
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <div style={{
                   width: '48px', height: '48px',
@@ -251,7 +244,6 @@ export function ProtectionWeaknesses() {
                 {w.description}
               </p>
 
-              {/* Impact label */}
               <div style={{
                 background: `${w.color}10`,
                 border: `1px solid ${w.color}25`,
@@ -263,7 +255,6 @@ export function ProtectionWeaknesses() {
                 ⚡ {w.impact}
               </div>
 
-              {/* Problem list */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {w.problems.map(p => (
                   <div key={p} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -273,7 +264,6 @@ export function ProtectionWeaknesses() {
                 ))}
               </div>
 
-              {/* Bottom glow line */}
               <div style={{
                 position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
                 background: `linear-gradient(90deg, ${w.color}, transparent)`,
@@ -285,7 +275,6 @@ export function ProtectionWeaknesses() {
         })}
       </div>
 
-      {/* Connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,180,255,0.4), transparent)' }} />
       </div>

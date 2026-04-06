@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { ChevronDown, Zap } from 'lucide-react';
 
-const CVHTE_ITEMS = [
+const CVHET_ITEMS = [
   { letter: 'C', label: 'Current',    color: '#00b4ff' },
   { letter: 'V', label: 'Voltage',    color: '#4dd8ff' },
   { letter: 'H', label: 'Harmonics',  color: '#ff9f0a' },
-  { letter: 'T', label: 'Temperature',color: '#ff6b6b' },
   { letter: 'E', label: 'Earthing',   color: '#00e98c' },
+  { letter: 'T', label: 'Temperature',color: '#ff6b6b' },
 ];
 
 function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, enabled: boolean) {
@@ -26,8 +26,7 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     renderer.setSize(W, H);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x020c1b, 1);
-
-    // ── Generate 3D Power Lines (Paths) ──────────────────────────────────────
+    
     const PATH_COUNT = 6;
     const paths: THREE.CatmullRomCurve3[] = [];
     const pathLines: THREE.Line[] = [];
@@ -42,7 +41,6 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     for (let i = 0; i < PATH_COUNT; i++) {
        const yOffset = (i - PATH_COUNT / 2) * 2;
        const zOffset = (Math.random() - 0.5) * 8;
-       // Create smooth flowing paths across the screen
        const curve = new THREE.CatmullRomCurve3([
          new THREE.Vector3(-25, yOffset + Math.random() * 4 - 2, zOffset - 2),
          new THREE.Vector3(-12, yOffset + Math.random() * 3 - 1.5, zOffset + 2),
@@ -52,7 +50,6 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
        ]);
        paths.push(curve);
 
-       // Draw the actual wire slightly visible
        const points = curve.getPoints(100);
        const geometry = new THREE.BufferGeometry().setFromPoints(points);
        const line = new THREE.Line(geometry, lineMat.clone());
@@ -60,16 +57,14 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
        pathLines.push(line);
     }
 
-    // ── Electrical Current Pulses (Flowing Energy) ───────────────────
     const BURST_COUNT = 24;
-    const TAIL_LENGTH = 30; // Long thick tail
+    const TAIL_LENGTH = 30;
     const totalPoints = BURST_COUNT * TAIL_LENGTH;
     
     const travelPositions = new Float32Array(totalPoints * 3);
     const travelOpacities = new Float32Array(totalPoints);
     
     for(let i=0; i<totalPoints; i++) {
-       // Exponential fade for realistic glowing tail
        const t = i % TAIL_LENGTH / TAIL_LENGTH;
        travelOpacities[i] = Math.pow(t, 2); 
     }
@@ -86,7 +81,6 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
         void main() {
           vAlpha = alpha;
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          // Perfectly sized electrical plasma (not too thin, not too thick)
           gl_PointSize = (100.0 / -mvPosition.z) * (0.5 + vAlpha * 0.5);
           gl_Position = projectionMatrix * mvPosition;
         }
@@ -108,9 +102,8 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     
     scene.add(new THREE.Points(travelGeo, travelMat));
 
-    // Assign current bursts to travel along paths
     const travelers = Array.from({ length: BURST_COUNT }, () => {
-      const isReverse = Math.random() > 0.7; // Most flow left-to-right
+      const isReverse = Math.random() > 0.7;
       return {
         pathIdx: Math.floor(Math.random() * PATH_COUNT),
         progress: Math.random(),
@@ -119,7 +112,6 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
       };
     });
 
-    // ── Environmental Ambience ──────────────────────────────────
     const AMBIENT = 150;
     const ambPositions = new Float32Array(AMBIENT * 3);
     for (let i = 0; i < AMBIENT; i++) {
@@ -136,9 +128,8 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     const ambPoints = new THREE.Points(ambGeo, ambMat);
     scene.add(ambPoints);
 
-    // ── Short Circuit / Arc Sparks System ──────────────────────
-    const EXPLOSION_MAX = 5;
-    const SPARKS_PER_EXPLOSION = 30; // More intense explosion
+    const EXPLOSION_MAX = 2;
+    const SPARKS_PER_EXPLOSION = 8;
     const expPoints = EXPLOSION_MAX * SPARKS_PER_EXPLOSION;
     
     const expPositions = new Float32Array(expPoints * 3);
@@ -149,17 +140,15 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     expGeo.setAttribute('position', new THREE.BufferAttribute(expPositions, 3));
     expGeo.setAttribute('alpha', new THREE.BufferAttribute(expOpacities, 1));
 
-    // Fast-burning bright spark material
     const expMat = new THREE.ShaderMaterial({
-      uniforms: { color: { value: new THREE.Color(0xffaa00) } }, // Yellow/Orange sparks
+      uniforms: { color: { value: new THREE.Color(0xff4422) } },
       vertexShader: `
         attribute float alpha;
         varying float vAlpha;
         void main() {
           vAlpha = alpha;
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          // Scale drastically increased so sparks are fiercely visible
-          gl_PointSize = (150.0 / -mvPosition.z) * vAlpha; 
+          gl_PointSize = (40.0 / -mvPosition.z) * vAlpha; 
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
@@ -169,7 +158,7 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
         void main() {
           float dist = distance(gl_PointCoord, vec2(0.5));
           if (dist > 0.5) discard;
-          gl_FragColor = vec4(color, vAlpha * smoothstep(0.5, 0.0, dist) * 3.0);
+          gl_FragColor = vec4(color, vAlpha * smoothstep(0.5, 0.0, dist) * 1.5);
         }
       `,
       transparent: true,
@@ -180,14 +169,12 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
 
     let activeExplosions: { pIndex: number, life: number }[] = [];
 
-    // Trigger function to ignite a spark burst at a location
     const triggerSpark = (x: number, y: number, z: number) => {
-      // Find a dead explosion block to use
       let block = -1;
       for (let i = 0; i < EXPLOSION_MAX; i++) {
         if (!activeExplosions.some(e => e.pIndex === i)) { block = i; break; }
       }
-      if (block === -1) return; // All max sparks active
+      if (block === -1) return;
       
       activeExplosions.push({ pIndex: block, life: 1.0 });
       
@@ -196,16 +183,14 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
         expPositions[idx * 3]     = x;
         expPositions[idx * 3 + 1] = y;
         expPositions[idx * 3 + 2] = z;
-        expOpacities[idx] = 1.0;
+        expOpacities[idx] = 0.8;
         
-        // Explosive outward velocity
-        expVelocities[idx * 3] = (Math.random() - 0.5) * 0.4;
-        expVelocities[idx * 3 + 1] = (Math.random() - 0.5) * 0.4;
-        expVelocities[idx * 3 + 2] = (Math.random() - 0.5) * 0.4;
+        expVelocities[idx * 3] = (Math.random() - 0.5) * 0.15;
+        expVelocities[idx * 3 + 1] = (Math.random() - 0.5) * 0.15;
+        expVelocities[idx * 3 + 2] = (Math.random() - 0.5) * 0.15;
       }
     };
 
-    // ── Animation Loop ────────────────────────────────
     let rafId: number;
     const clock = new THREE.Clock();
 
@@ -213,21 +198,17 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
       rafId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      // Slow scene breathing
       camera.position.x = Math.sin(t * 0.2) * 2;
       camera.position.y = Math.cos(t * 0.15) * 1;
       camera.lookAt(0, 0, 0);
 
-      // Pulse wire brightness dynamically
       pathLines.forEach((line, i) => {
         (line.material as THREE.LineBasicMaterial).opacity = 0.1 + Math.sin(t * 1.5 + i) * 0.08;
       });
 
-      // Update flowing current pulses along designated paths
       travelers.forEach((state, burstIdx) => {
         state.progress += state.speed * state.direction;
         
-        // Loop continuously around the wire
         if (state.progress >= 1) {
           state.progress = 0; 
           state.pathIdx = Math.floor(Math.random() * PATH_COUNT);
@@ -239,7 +220,6 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
         const path = paths[state.pathIdx];
         let headPt = new THREE.Vector3();
         
-        // Draw the intense head and fading tail tracing the curve perfectly
         for (let tailIdx = 0; tailIdx < TAIL_LENGTH; tailIdx++) {
            const idx = burstIdx * TAIL_LENGTH + tailIdx;
            
@@ -249,23 +229,21 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
            if (p > 1) p -= 1;
            
            const pt = path.getPointAt(p);
-           if (tailIdx === 0) headPt.copy(pt); // Save head position for sparks
+           if (tailIdx === 0) headPt.copy(pt);
            
            travelPositions[idx * 3]     = pt.x;
            travelPositions[idx * 3 + 1] = pt.y;
            travelPositions[idx * 3 + 2] = pt.z;
         }
 
-        // Randomly spark heavily while traveling (simulates short circuiting/arc flash)
-        if (Math.random() < 0.005) {
+        if (Math.random() < 0.0005) {
           triggerSpark(headPt.x, headPt.y, headPt.z);
         }
       });
       travelGeo.attributes.position.needsUpdate = true;
 
-      // Update Sparks Physics
       activeExplosions = activeExplosions.filter(exp => {
-        exp.life -= 0.04; // Fast fade
+        exp.life -= 0.02;
         const stillAlive = exp.life > 0;
         
         for (let i = 0; i < SPARKS_PER_EXPLOSION; i++) {
@@ -274,10 +252,10 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
              expPositions[idx * 3]     += expVelocities[idx * 3];
              expPositions[idx * 3 + 1] += expVelocities[idx * 3 + 1];
              expPositions[idx * 3 + 2] += expVelocities[idx * 3 + 2];
-             expVelocities[idx * 3 + 1] -= 0.01; // Gravity pull down on sparks
-             expOpacities[idx] = exp.life * Math.random(); // Flickering fade
+             expVelocities[idx * 3 + 1] -= 0.006; 
+             expOpacities[idx] = exp.life * 0.6;
            } else {
-             expOpacities[idx] = 0; // Hide dead sparks
+             expOpacities[idx] = 0; 
            }
         }
         return stillAlive;
@@ -287,7 +265,6 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
          expGeo.attributes.alpha.needsUpdate = true;
       }
 
-      // Rotate ambient particles
       ambPoints.rotation.y = t * 0.03;
 
       renderer.render(scene, camera);
@@ -317,14 +294,12 @@ export function HeroSection() {
   const canvasRef  = useRef<HTMLCanvasElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [visible,  setVisible]  = useState(false);
-  const [cvhteIdx, setCvhteIdx] = useState(0);
+  const [cvhetIdx, setCvhteIdx] = useState(0);
 
-  // Skip Three.js on mobile to save GPU/CPU for better Lighthouse scores
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
 
   useThreeScene(canvasRef, isDesktop);
 
-  // Parallax scroll — canvas drifts at 0.3×, content at 0.15×
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
@@ -346,9 +321,8 @@ export function HeroSection() {
     return () => clearTimeout(t);
   }, []);
 
-  // Cycle CVHTE highlight
   useEffect(() => {
-    const id = setInterval(() => setCvhteIdx(prev => (prev + 1) % CVHTE_ITEMS.length), 1800);
+    const id = setInterval(() => setCvhteIdx(prev => (prev + 1) % CVHET_ITEMS.length), 1800);
     return () => clearInterval(id);
   }, []);
 
@@ -357,7 +331,6 @@ export function HeroSection() {
       id="hero"
       style={{ position: 'relative', height: '100vh', minHeight: '700px', overflow: 'hidden', background: '#020c1b' }}
     >
-      {/* Three.js canvas – hidden on mobile (no WebGL work done) */}
       {isDesktop && (
         <canvas
           ref={canvasRef}
@@ -365,14 +338,12 @@ export function HeroSection() {
         />
       )}
 
-      {/* Radial vignette overlay */}
       <div style={{
         position: 'absolute', inset: 0,
         background: 'radial-gradient(ellipse at center, rgba(2,12,27,0.2) 0%, rgba(2,12,27,0.75) 70%)',
         pointerEvents: 'none',
       }} />
 
-      {/* Horizontal scan line (represents signal sweep) */}
       <div style={{
         position: 'absolute', left: 0, right: 0, height: '1px',
         background: 'linear-gradient(90deg, transparent, rgba(0,180,255,0.4), transparent)',
@@ -380,7 +351,6 @@ export function HeroSection() {
         pointerEvents: 'none',
       }} />
 
-      {/* Content overlay */}
       <div
         ref={contentRef}
         style={{
@@ -390,7 +360,6 @@ export function HeroSection() {
         opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
       }}>
 
-        {/* Shield badge */}
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
           border: '1px solid rgba(0,180,255,0.3)',
@@ -401,11 +370,10 @@ export function HeroSection() {
         }}>
           <Zap size={12} color="#ff9f0a" fill="#ff9f0a" />
           <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#7ba6c4', letterSpacing: '3px' }}>
-            ELECTRICAL SYSTEM INTELLIGENCE
+            ELECTRICAL BREAKDOWN EXPERT
           </span>
         </div>
 
-        {/* Company name */}
         <div style={{
           fontFamily: 'Orbitron, sans-serif',
           fontSize: 'clamp(28px, 5vw, 56px)',
@@ -416,10 +384,9 @@ export function HeroSection() {
           marginBottom: '8px',
           animation: 'flickerIn 0.8s ease-out forwards',
         }}>
-          CVHTE INTELLIGENCE
+          CVHET ELECTRICAL BREAKDOWN EXPERT
         </div>
 
-        {/* CVHTE system title */}
         <div style={{
           fontFamily: 'Orbitron, sans-serif',
           fontSize: 'clamp(14px, 2.5vw, 22px)',
@@ -432,10 +399,9 @@ export function HeroSection() {
           ADVANCED SYSTEM DIAGNOSTICS
         </div>
 
-        {/* CVHTE Acronym breakdown */}
         <div style={{ display: 'flex', gap: 'clamp(12px, 2vw, 32px)', marginBottom: '48px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          {CVHTE_ITEMS.map((item, i) => {
-            const isActive = i === cvhteIdx;
+          {CVHET_ITEMS.map((item, i) => {
+            const isActive = i === cvhetIdx;
             return (
               <div key={item.letter} style={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
@@ -475,7 +441,6 @@ export function HeroSection() {
           })}
         </div>
 
-        {/* Description */}
         <p style={{
           maxWidth: '600px',
           fontFamily: 'Space Grotesk, sans-serif',
@@ -485,10 +450,9 @@ export function HeroSection() {
           marginBottom: '40px',
         }}>
           A comprehensive monitoring and protection coordination framework that diagnoses
-          electrical system failures at their root — reducing industrial breakdowns by up to <strong style={{ color: '#00b4ff' }}>40%</strong>.
+          electrical system failures at their root — reducing industrial breakdowns by up to <strong style={{ color: '#00b4ff' }}>80%</strong>.
         </p>
 
-        {/* CTA buttons */}
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
           <a href="#breakdowns" style={{
             background: '#00b4ff',
@@ -527,7 +491,6 @@ export function HeroSection() {
           </a>
         </div>
 
-        {/* Cool Scroll indicator */}
         <a href="#breakdowns" style={{
           position: 'absolute', bottom: '40px',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px',
@@ -559,7 +522,6 @@ export function HeroSection() {
         </a>
       </div>
 
-      {/* Bottom fade */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px',
         background: 'linear-gradient(to bottom, transparent, #020c1b)',

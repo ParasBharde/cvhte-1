@@ -98,14 +98,12 @@ export function SymptomsSection() {
         position: 'relative',
       }}
     >
-      {/* Decorative left line */}
       <div style={{
         position: 'absolute', left: '40px', top: 0, bottom: 0, width: '1px',
         background: 'linear-gradient(to bottom, transparent, rgba(255,51,85,0.3) 30%, rgba(255,51,85,0.3) 70%, transparent)',
         pointerEvents: 'none',
       }} />
 
-      {/* Section header */}
       <div style={{ textAlign: 'center', marginBottom: '70px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -133,11 +131,10 @@ export function SymptomsSection() {
           color: '#7ba6c4', lineHeight: 1.7,
         }}>
           These observable symptoms are your electrical system's distress signals — each one
-          pointing to an underlying abnormality that CVHTE monitoring can precisely identify.
+          pointing to an underlying abnormality that CVHET monitoring can precisely identify.
         </p>
       </div>
 
-      {/* Symptom grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -166,7 +163,6 @@ export function SymptomsSection() {
                 position: 'relative', overflow: 'hidden',
               }}
             >
-              {/* Corner flash (power-on effect when hovered) */}
               {isHovered && (
                 <div style={{
                   position: 'absolute', top: 0, right: 0,
@@ -176,7 +172,6 @@ export function SymptomsSection() {
                 }} />
               )}
 
-              {/* Header */}
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '16px' }}>
                 <div style={{
                   width: '44px', height: '44px',
@@ -224,7 +219,6 @@ export function SymptomsSection() {
                 {symptom.description}
               </p>
 
-              {/* Indicator tags */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                 {symptom.indicators.map(ind => (
                   <span key={ind} style={{
@@ -240,7 +234,6 @@ export function SymptomsSection() {
                 ))}
               </div>
 
-              {/* Bottom accent */}
               <div style={{
                 position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
                 background: `linear-gradient(90deg, ${symptom.color}80, transparent)`,
@@ -251,7 +244,6 @@ export function SymptomsSection() {
         })}
       </div>
 
-      {/* Section connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(255,159,10,0.4), transparent)' }} />
       </div>

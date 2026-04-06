@@ -27,7 +27,7 @@ const CHART_DATA = [
 ];
 
 const METRICS = [
-  { icon: TrendingDown, value: 40,  unit: '%',  label: 'Reduction in Breakdowns',     color: '#00e98c', desc: 'Year-on-year decline in unplanned electrical failure events' },
+  { icon: TrendingDown, value: 80,  unit: '%',  label: 'Reduction in Breakdowns',     color: '#00e98c', desc: 'Year-on-year decline in unplanned electrical failure events' },
   { icon: Clock,        value: 55,  unit: '%',  label: 'Less Unplanned Downtime',      color: '#00b4ff', desc: 'Reduction in production hours lost to electrical failures' },
   { icon: Award,        value: 3,   unit: '×',  label: 'Equipment Lifespan Extended',  color: '#ff9f0a', desc: 'Average extension in service life of protected assets' },
   { icon: Wrench,       value: 45,  unit: '%',  label: 'Maintenance Cost Reduced',     color: '#a855f7', desc: 'Shift from reactive to condition-based maintenance strategy' },
@@ -49,7 +49,7 @@ function CustomTooltip({ active, payload, label }: any) {
         <div key={p.dataKey} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
           <div style={{ width: '8px', height: '8px', background: p.fill, borderRadius: '50%' }} />
           <span style={{ fontSize: '13px', color: '#a0bfd6' }}>
-            {p.dataKey === 'before' ? 'Pre-CVHTE' : 'Post-CVHTE'}:
+            {p.dataKey === 'before' ? 'Pre-CVHET' : 'Post-CVHET'}:
           </span>
           <span style={{ fontSize: '13px', color: p.fill, fontWeight: 600 }}>
             {p.value} breakdowns
@@ -80,15 +80,13 @@ export function ReductionSection() {
   useEffect(() => {
     const triggerInView = () => {
       setInView(true);
-      // GSAP counter animation
       const obj = { value: 0 };
       gsap.to(obj, {
-        value: 40,
+        value: 80,
         duration: 2.2,
         ease: 'power3.out',
         onUpdate: () => setCount(Math.round(obj.value)),
       });
-      // Animate chart bars appearing
       setTimeout(() => {
         setChartData(CHART_DATA);
       }, 600);
@@ -119,7 +117,6 @@ export function ReductionSection() {
         overflow: 'hidden',
       }}
     >
-      {/* Background large percentage ghost text */}
       <div style={{
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)',
@@ -131,10 +128,9 @@ export function ReductionSection() {
         letterSpacing: '-20px',
         whiteSpace: 'nowrap',
       }}>
-        40%
+        80%
       </div>
 
-      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '70px', position: 'relative' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -152,7 +148,7 @@ export function ReductionSection() {
           letterSpacing: '2px',
           marginBottom: '16px',
         }}>
-          <span style={{ color: '#00e98c', textShadow: '0 0 30px rgba(0,233,140,0.6)' }}>40% REDUCTION</span><br />
+          <span style={{ color: '#00e98c', textShadow: '0 0 30px rgba(0,233,140,0.6)' }}>80% REDUCTION</span><br />
           IN ELECTRICAL BREAKDOWNS
         </h2>
         <p style={{
@@ -161,12 +157,11 @@ export function ReductionSection() {
           fontSize: 'clamp(14px, 1.6vw, 16px)',
           color: '#7ba6c4', lineHeight: 1.7,
         }}>
-          Measured across facilities where CVHTE monitoring and protection coordination
+          Measured across facilities where CVHET monitoring and protection coordination
           were implemented — tracked over 12 months before and after deployment.
         </p>
       </div>
 
-      {/* Large animated counter */}
       <div
         ref={counterRef}
         style={{
@@ -194,7 +189,6 @@ export function ReductionSection() {
           BREAKDOWN REDUCTION
         </div>
 
-        {/* Radial progress arc */}
         <svg
           style={{ position: 'absolute', top: '-20px', pointerEvents: 'none' }}
           width="300" height="180" viewBox="0 0 300 180"
@@ -218,7 +212,6 @@ export function ReductionSection() {
         </svg>
       </div>
 
-      {/* Chart */}
       <div style={{
         background: '#051a2e',
         border: '1px solid rgba(0,180,255,0.1)',
@@ -243,11 +236,11 @@ export function ReductionSection() {
           <div style={{ display: 'flex', gap: '20px', marginLeft: 'auto' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <div style={{ width: '12px', height: '12px', background: '#ff3355', opacity: 0.8 }} />
-              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#7ba6c4' }}>Pre-CVHTE</span>
+              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#7ba6c4' }}>Pre-CVHET</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <div style={{ width: '12px', height: '12px', background: '#00e98c', opacity: 0.8 }} />
-              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#7ba6c4' }}>Post-CVHTE</span>
+              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#7ba6c4' }}>Post-CVHET</span>
             </div>
           </div>
         </div>
@@ -307,7 +300,6 @@ export function ReductionSection() {
         </ResponsiveContainer>
       </div>
 
-      {/* Metrics grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -372,7 +364,6 @@ export function ReductionSection() {
         })}
       </div>
 
-      {/* Connector */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,233,140,0.4), transparent)' }} />
       </div>

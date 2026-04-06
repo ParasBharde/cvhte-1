@@ -12,8 +12,8 @@ const NAV_FOOTER = [
   { label: 'Symptoms & Signs',      href: '#symptoms' },
   { label: 'Current Abnormalities', href: '#abnormalities' },
   { label: 'Design Causes',         href: '#causes' },
-  { label: 'CVHTE Diagnostic',      href: '#diagnostic' },
-  { label: '40% Reduction Results', href: '#reduction' },
+  { label: 'CVHET Diagnostic',      href: '#diagnostic' },
+  { label: '80% Reduction Results', href: '#reduction' },
 ];
 
 export function ContactFooter() {
@@ -59,7 +59,6 @@ export function ContactFooter() {
 
   return (
     <>
-      {/* Contact section */}
       <section
         id="contact"
         ref={ref}
@@ -69,7 +68,6 @@ export function ContactFooter() {
           position: 'relative',
         }}
       >
-        {/* Background circuit pattern */}
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: 'linear-gradient(rgba(0,180,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,255,0.02) 1px, transparent 1px)',
@@ -77,7 +75,6 @@ export function ContactFooter() {
           pointerEvents: 'none',
         }} />
 
-        {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '70px', position: 'relative' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -85,7 +82,7 @@ export function ContactFooter() {
             padding: '5px 14px', marginBottom: '20px',
           }}>
             <Zap size={12} color="#00b4ff" fill="#00b4ff" />
-            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>ENGAGE WITH CVHTE INTELLIGENCE</span>
+            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>ENGAGE WITH CVHET</span>
           </div>
           <h2 style={{
             fontFamily: 'Orbitron, sans-serif',
@@ -95,7 +92,7 @@ export function ContactFooter() {
             letterSpacing: '2px',
             marginBottom: '16px',
           }}>
-            REQUEST A CVHTE<br />
+            REQUEST A CVHET<br />
             <span style={{ color: '#00b4ff' }}>SYSTEM ANALYSIS</span>
           </h2>
           <p style={{
@@ -105,11 +102,10 @@ export function ContactFooter() {
             color: '#7ba6c4', lineHeight: 1.7,
           }}>
             Begin your electrical system diagnostic today. Our engineers will review your
-            facility's CVHTE parameters and provide a comprehensive breakdown risk report.
+            facility's CVHET parameters and provide a comprehensive breakdown risk report.
           </p>
         </div>
 
-        {/* Grid: form + info */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
@@ -119,7 +115,6 @@ export function ContactFooter() {
           transition: 'opacity 0.8s ease',
         }}>
 
-          {/* Form */}
           <div style={{
             background: '#051a2e',
             border: '1px solid rgba(0,180,255,0.12)',
@@ -145,7 +140,7 @@ export function ContactFooter() {
                     REQUEST TRANSMITTED
                   </div>
                   <p style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '14px', color: '#7ba6c4', lineHeight: 1.7 }}>
-                    Our engineering team will contact you within 24 hours to schedule your CVHTE diagnostic session.
+                    Our engineering team will contact you within 24 hours to schedule your CVHET diagnostic session.
                   </p>
                 </div>
               </div>
@@ -210,7 +205,7 @@ export function ContactFooter() {
                     onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)')}
                   >
                     <option value="" style={{ background: '#051a2e' }}>Select a service...</option>
-                    <option value="cvhte-audit" style={{ background: '#051a2e' }}>Full CVHTE System Audit</option>
+                    <option value="cvhet-audit" style={{ background: '#051a2e' }}>Full CVHET System Audit</option>
                     <option value="protection-study" style={{ background: '#051a2e' }}>Protection Coordination Study</option>
                     <option value="harmonic-analysis" style={{ background: '#051a2e' }}>Harmonic & Power Quality Analysis</option>
                     <option value="earth-testing" style={{ background: '#051a2e' }}>Earthing System Assessment</option>
@@ -258,13 +253,11 @@ export function ContactFooter() {
             )}
           </div>
 
-          {/* Contact info */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
-            {/* Contact cards */}
             {[
-              { icon: Phone, label: 'CALL US', value: '+91 98765 43210', sub: 'Mon–Sat, 9 AM – 6 PM IST', color: '#00b4ff' },
-              { icon: Mail,  label: 'EMAIL',   value: 'info@cvhte.in', sub: 'Response within 24 hours', color: '#4dd8ff' },
+              { icon: Phone, label: 'CALL US', value: '+91 9823580555', sub: 'Mon–Sat, 9 AM – 6 PM IST', color: '#00b4ff', href: 'tel:+919823580555' },
+              { icon: Mail,  label: 'EMAIL',   value: 'ask@cvhet.com', sub: 'Response within 24 hours', color: '#4dd8ff', href: 'mailto:ask@cvhet.com' },
               { icon: MapPin,label: 'OFFICE',  value: 'Pune, Maharashtra, India', sub: 'Pan-India site visits available', color: '#00e98c' },
             ].map((c, ci) => {
               const Icon = c.icon;
@@ -290,9 +283,21 @@ export function ContactFooter() {
                     <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '10px', color: '#4a6a84', letterSpacing: '1.5px', marginBottom: '4px' }}>
                       {c.label}
                     </div>
-                    <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '14px', color: '#e8f4fd', fontWeight: 600 }}>
-                      {c.value}
-                    </div>
+                    {c.href ? (
+                      <a href={c.href} style={{
+                        fontFamily: 'Space Grotesk, sans-serif', fontSize: '14px', color: '#e8f4fd', fontWeight: 600,
+                        textDecoration: 'none', transition: 'color 0.2s', display: 'inline-block', marginBottom: '4px'
+                      }}
+                        onMouseEnter={e => { (e.currentTarget.style.color = c.color); }}
+                        onMouseLeave={e => { (e.currentTarget.style.color = '#e8f4fd'); }}
+                      >
+                        {c.value}
+                      </a>
+                    ) : (
+                      <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '14px', color: '#e8f4fd', fontWeight: 600, marginBottom: '4px' }}>
+                        {c.value}
+                      </div>
+                    )}
                     <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#4a6a84' }}>
                       {c.sub}
                     </div>
@@ -301,7 +306,6 @@ export function ContactFooter() {
               );
             })}
 
-            {/* Services quick list */}
             <div style={{
               background: '#051a2e',
               border: '1px solid rgba(0,180,255,0.1)',
@@ -316,7 +320,7 @@ export function ContactFooter() {
                 OUR SERVICES
               </div>
               {[
-                'CVHTE Parameter Monitoring',
+                'CVHET Parameter Monitoring',
                 'Protection Coordination Studies',
                 'Power Quality & Harmonic Analysis',
                 'Earthing System Design & Testing',
@@ -345,7 +349,6 @@ export function ContactFooter() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer style={{
         background: '#010911',
         borderTop: '1px solid rgba(0,180,255,0.08)',
@@ -356,7 +359,6 @@ export function ContactFooter() {
           flexWrap: 'wrap', gap: '32px',
           marginBottom: '32px',
         }}>
-          {/* Brand */}
           <div>
             <div style={{
               fontFamily: 'Orbitron, sans-serif',
@@ -364,17 +366,16 @@ export function ContactFooter() {
               color: '#00b4ff', letterSpacing: '3px',
               marginBottom: '4px',
             }}>
-              CVHTE INTELLIGENCE
+              CVHET ELECTRICAL BREAKDOWN EXPERT
             </div>
             <div style={{
               fontFamily: 'Space Grotesk, sans-serif',
               fontSize: '12px', color: '#4a6a84',
             }}>
-              CVHTE System — Current · Voltage · Harmonics · Temperature · Earthing
+              CVHET System — Current · Voltage · Harmonics · Earthing · Temperature
             </div>
           </div>
 
-          {/* Social links */}
           <div style={{ display: 'flex', gap: '12px' }}>
             {[Linkedin, Twitter, Globe].map((Icon, i) => (
               <button key={i} style={{
@@ -400,7 +401,6 @@ export function ContactFooter() {
           </div>
         </div>
 
-        {/* Footer nav */}
         <div style={{
           display: 'flex', flexWrap: 'wrap', gap: '16px 32px',
           marginBottom: '32px',
@@ -421,7 +421,6 @@ export function ContactFooter() {
           ))}
         </div>
 
-        {/* Copyright */}
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: '12px',
@@ -430,7 +429,7 @@ export function ContactFooter() {
             fontFamily: 'Space Grotesk, sans-serif',
             fontSize: '12px', color: '#2a4a64',
           }}>
-            © 2026 CVHTE Intelligence. All rights reserved. CVHTE is a proprietary electrical diagnostic system.
+            © 2026 CVHET Electrical Breakdown Expert. All rights reserved. CVHET is a proprietary electrical diagnostic system.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{
