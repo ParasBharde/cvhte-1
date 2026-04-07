@@ -56,27 +56,31 @@ export function NavBar() {
     >
       <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
         <div style={{
-          background: '#ffffff',
+          background: 'rgba(5, 26, 46, 0.6)',
+          backdropFilter: 'blur(8px)',
           padding: '6px',
-          borderRadius: '6px',
+          borderRadius: '8px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 0 20px rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(0, 180, 255, 0.2)',
+          boxShadow: '0 0 15px rgba(0, 180, 255, 0.1)',
           transition: 'all 0.3s ease',
           flexShrink: 0,
         }}
           onMouseEnter={e => {
             e.currentTarget.style.transform = 'scale(1.04)';
-            e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.3)';
+            e.currentTarget.style.boxShadow = '0 0 25px rgba(0, 180, 255, 0.3)';
+            e.currentTarget.style.borderColor = 'rgba(0, 180, 255, 0.5)';
           }}
           onMouseLeave={e => {
             e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.15)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 180, 255, 0.1)';
+            e.currentTarget.style.borderColor = 'rgba(0, 180, 255, 0.2)';
           }}
         >
           <img
-            src="/CVHET-1.png"
+            src="/CVHET_Logo_1.png"
             alt="CVHET Logo"
             style={{
               height: '44px',

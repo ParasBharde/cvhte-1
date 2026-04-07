@@ -91,7 +91,7 @@ function ScrollEnergyFlow() {
       const drawLightning = (baseX: number, reversePhase: boolean) => {
         ctx.beginPath();
         ctx.strokeStyle = color;
-        ctx.lineWidth = mode === 'short_circuit' ? 1 + Math.random() * 1 : 1;
+        ctx.lineWidth = mode === 'short_circuit' ? 1.5 : 1;
         ctx.shadowColor = color;
         ctx.shadowBlur = mode === 'short_circuit' ? 20 : 12;
 
@@ -109,17 +109,20 @@ function ScrollEnergyFlow() {
           const phase = reversePhase ? -time : time;
 
           if (mode === 'short_circuit') {
-            targetX += (Math.random() - 0.5) * amplitude * 1;
+            targetX += (Math.random() - 0.5) * amplitude * 0.3;
 
-            if (Math.random() < 0.005) {
+            if (Math.random() < 0.003) {
               sparks.push(new Spark(targetX, targetY, color, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4));
             }
           } else if (mode === 'pulse') {
-            targetX += Math.sin(phase * 4 + i * 0.8) > 0 ? amplitude : -amplitude;
+            // Original square pulse but slowed down
+            targetX += Math.sin(phase * 1.5 + i * 0.8) > 0 ? amplitude : -amplitude;
           } else if (mode === 'perfect') {
-            targetX += Math.sin(phase * 8 + i * 0.4) * amplitude;
+            // Original sine wave but slowed down
+            targetX += Math.sin(phase * 3.0 + i * 0.4) * amplitude;
           } else {
-            targetX += Math.sin(phase * 2 + i * 0.2) * amplitude;
+            // Original sine wave but slowed down
+            targetX += Math.sin(phase * 1.5 + i * 0.2) * amplitude;
           }
 
           ctx.lineTo(targetX, targetY);
@@ -268,7 +271,7 @@ function ArcBackground() {
 
 export default function App() {
   const location = useLocation();
-  
+
   return (
     <div style={{ background: '#020c1b', color: '#e8f4fd', overflowX: 'hidden', minHeight: '100vh' }}>
       <ScrollEnergyFlow />
