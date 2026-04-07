@@ -55,7 +55,11 @@ const SERVICES = [
 ];
 
 export function ServicesPage() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   useEffect(() => {
+    if (isMobile) return;
+
     const timer = setTimeout(() => {
       const contents = gsap.utils.toArray<HTMLElement>('.service-content');
       const visuals = gsap.utils.toArray<HTMLElement>('.service-visual');
@@ -66,21 +70,19 @@ export function ServicesPage() {
           start: 'top top',
           end: '+=5000px',
           pin: true,
-          scrub: 1.5, // Added inertia for buttery smooth scroll
+          scrub: 1.2, 
+          anticipatePin: 1,
         }
       });
 
       for(let i = 0; i < SERVICES.length - 1; i++) {
-        // Outgoing slide fades up and out
-        tl.to(contents[i], { opacity: 0, y: -50, duration: 1.2, ease: 'power2.inOut' }, `step${i}`)
-          .to(visuals[i], { opacity: 0, scale: 0.6, filter: 'blur(20px)', duration: 1.2, ease: 'power2.inOut' }, `step${i}`);
+        tl.to(contents[i], { opacity: 0, y: -40, duration: 1, ease: 'power2.inOut' }, `step${i}`)
+          .to(visuals[i], { opacity: 0, scale: 0.8, filter: 'blur(10px)', duration: 1, ease: 'power2.inOut' }, `step${i}`);
 
-        // Incoming slide fades up and in (overlaps slightly with the exit)
-        tl.to(contents[i+1], { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out' }, `step${i}+=0.6`)
-          .to(visuals[i+1], { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power2.out' }, `step${i}+=0.6`);
+        tl.to(contents[i+1], { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out' }, `step${i}+=0.5`)
+          .to(visuals[i+1], { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power2.out' }, `step${i}+=0.5`);
 
-        // Hold frame before next transition so user actually has time to read
-        tl.to({}, { duration: 1.5 });
+        tl.to({}, { duration: 1 });
       }
 
       return () => {
@@ -90,7 +92,7 @@ export function ServicesPage() {
     }, 800);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isMobile]);
 
   return (
     <motion.div
@@ -98,77 +100,134 @@ export function ServicesPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
-      style={{ overflow: 'hidden' }}
+      style={{ overflowX: 'hidden' }}
     >
-      <section id="services-pin-section" style={{ height: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      <section id="services-pin-section" style={{ 
+        minHeight: '100vh', 
+        height: isMobile ? 'auto' : '100vh', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        position: 'relative',
+        padding: isMobile ? '100px 0 60px' : '0' 
+      }}>
         
-        {/* Fixed Title Header within Pin */}
-        <div style={{ width: '100%', textAlign: 'center', marginTop: '120px', zIndex: 10 }}>
+        {/* Fixed Title Header */}
+        <div style={{ width: '100%', textAlign: 'center', marginTop: isMobile ? '0' : '120px', zIndex: 10, marginBottom: isMobile ? '60px' : '0' }}>
           <h1 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(28px, 4vw, 42px)', color: '#e8f4fd', letterSpacing: '4px', margin: 0 }}>
             INDUSTRIAL <span style={{ color: '#0082b4', textShadow: '0 0 20px rgba(0, 130, 180,0.4)' }}>DEFENSE</span> PROTOCOLS
           </h1>
         </div>
 
-        <div style={{ flex: 1, display: 'flex', width: '100%', maxWidth: '1200px', margin: '0 auto', gap: '30px', padding: '0 clamp(20px, 5vw, 60px)', alignItems: 'center', alignContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ 
+          flex: 1, 
+          display: 'flex', 
+          width: '100%', 
+          maxWidth: '1200px', 
+          margin: '0 auto', 
+          gap: isMobile ? '60px' : '30px', 
+          padding: '0 clamp(20px, 5vw, 60px)', 
+          alignItems: 'center', 
+          flexDirection: isMobile ? 'column' : 'row',
+          position: 'relative'
+        }}>
           
-          {/* Left Text HUD Area */}
-          <div style={{ flex: '1 1 400px', position: 'relative', height: '400px' }}>
-            {SERVICES.map((srv, i) => (
-              <div key={srv.id} className="service-content" style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', opacity: i === 0 ? 1 : 0, transform: i === 0 ? 'translateY(0)' : 'translateY(50px)', pointerEvents: i === 0 ? 'auto' : 'none', willChange: 'opacity, transform' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '16px' }}>
-                  <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(48px, 6vw, 80px)', color: 'transparent', WebkitTextStroke: `2px ${srv.color}`, opacity: 0.5, fontWeight: 900, lineHeight: 0.8 }}>
-                    0{i+1}
-                  </div>
-                  <h2 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(24px, 3vw, 36px)', color: srv.color, WebkitTextStroke: `0.5px ${srv.color}`, lineHeight: 1.1, margin: 0 }}>
-                    {srv.title}
-                  </h2>
-                </div>
-                
-                <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(18px, 2vw, 22px)', color: '#e8f4fd', marginBottom: '24px', letterSpacing: '1px' }}>
-                  {srv.short}
-                </h3>
-                <p style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '15px', color: '#7ba6c4', lineHeight: 1.8, marginBottom: '40px', maxWidth: '500px' }}>
-                  {srv.desc}
-                </p>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {srv.features.map(f => (
-                    <div key={f} style={{ display: 'flex', alignItems: 'center', gap: '16px', fontFamily: 'Orbitron, sans-serif', fontSize: '13px', color: '#a0c4db', letterSpacing: '1px' }}>
-                      <div style={{ width: '80px', height: '1px', background: srv.color, boxShadow: `0 0 15px ${srv.color}` }} />
-                      {f}
+          {isMobile ? (
+            // Mobile: Sequential List
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', width: '100%' }}>
+              {SERVICES.map((srv, i) => (
+                <div key={srv.id} style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                      <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '48px', color: 'transparent', WebkitTextStroke: `2px ${srv.color}`, opacity: 0.5, fontWeight: 900 }}>
+                        0{i+1}
+                      </div>
+                      <h2 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '24px', color: srv.color, margin: 0 }}>
+                        {srv.title}
+                      </h2>
                     </div>
-                  ))}
+                    <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '18px', color: '#e8f4fd', margin: 0 }}>
+                      {srv.short}
+                    </h3>
+                    <p style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '15px', color: '#7ba6c4', lineHeight: 1.6, margin: 0 }}>
+                      {srv.desc}
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '10px' }}>
+                      {srv.features.map(f => (
+                        <div key={f} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontFamily: 'Orbitron, sans-serif', fontSize: '12px', color: '#a0c4db' }}>
+                          <div style={{ width: '30px', height: '1px', background: srv.color, boxShadow: `0 0 10px ${srv.color}` }} />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', height: '240px' }}>
+                    <srv.icon size={120} color={srv.color} style={{ filter: `drop-shadow(0 0 30px ${srv.color})`, opacity: 0.8 }} />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            // Desktop: GSAP Pinned Slides
+            <>
+              <div style={{ flex: '1 1 400px', position: 'relative', height: '400px' }}>
+                {SERVICES.map((srv, i) => (
+                  <div key={srv.id} className="service-content" style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', opacity: i === 0 ? 1 : 0, transform: i === 0 ? 'translateY(0)' : 'translateY(50px)', pointerEvents: i === 0 ? 'auto' : 'none', willChange: 'opacity, transform' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '16px' }}>
+                      <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(48px, 6vw, 80px)', color: 'transparent', WebkitTextStroke: `2px ${srv.color}`, opacity: 0.5, fontWeight: 900, lineHeight: 0.8 }}>
+                        0{i+1}
+                      </div>
+                      <h2 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(24px, 3vw, 36px)', color: srv.color, WebkitTextStroke: `0.5px ${srv.color}`, lineHeight: 1.1, margin: 0 }}>
+                        {srv.title}
+                      </h2>
+                    </div>
+                    
+                    <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(18px, 2vw, 22px)', color: '#e8f4fd', marginBottom: '24px', letterSpacing: '1px' }}>
+                      {srv.short}
+                    </h3>
+                    <p style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '15px', color: '#7ba6c4', lineHeight: 1.8, marginBottom: '40px', maxWidth: '500px' }}>
+                      {srv.desc}
+                    </p>
 
-          {/* Right Holographic Icon Area */}
-          <div style={{ flex: '1 1 400px', position: 'relative', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {SERVICES.map((srv, i) => (
-              <div key={srv.id} className="service-visual" style={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: i === 0 ? 1 : 0, transform: i === 0 ? 'scale(1)' : 'scale(0.6)', filter: i === 0 ? 'blur(0px)' : 'blur(20px)', willChange: 'opacity, transform, filter' }}>
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
-                  style={{ position: 'absolute', width: '380px', height: '380px', border: `2px dashed ${srv.color}`, borderRadius: '50%', opacity: 0.15 }}
-                />
-                <motion.div 
-                  animate={{ rotate: -360 }}
-                  transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-                  style={{ position: 'absolute', width: '280px', height: '280px', border: `1px solid rgba(255,255,255,0.05)`, borderRight: `3px solid ${srv.color}`, borderRadius: '50%', opacity: 0.4 }}
-                />
-                <motion.div 
-                   animate={{ scale: [1, 1.05, 1], rotate: [0, 5, -5, 0] }}
-                   transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
-                >
-                   <srv.icon size={180} color={srv.color} style={{ filter: `drop-shadow(0 0 50px ${srv.color}) drop-shadow(0 0 100px ${srv.color}66)` }} />
-                </motion.div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      {srv.features.map(f => (
+                        <div key={f} style={{ display: 'flex', alignItems: 'center', gap: '16px', fontFamily: 'Orbitron, sans-serif', fontSize: '13px', color: '#a0c4db', letterSpacing: '1px' }}>
+                          <div style={{ width: '80px', height: '1px', background: srv.color, boxShadow: `0 0 15px ${srv.color}` }} />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+
+              <div style={{ flex: '1 1 400px', position: 'relative', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {SERVICES.map((srv, i) => (
+                  <div key={srv.id} className="service-visual" style={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: i === 0 ? 1 : 0, transform: i === 0 ? 'scale(1)' : 'scale(0.6)', filter: i === 0 ? 'blur(0px)' : 'blur(20px)', willChange: 'opacity, transform, filter' }}>
+                    <motion.div 
+                      animate={{ rotate: 360 }}
+                      transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+                      style={{ position: 'absolute', width: '380px', height: '380px', border: `2px dashed ${srv.color}`, borderRadius: '50%', opacity: 0.15 }}
+                    />
+                    <motion.div 
+                      animate={{ rotate: -360 }}
+                      transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
+                      style={{ position: 'absolute', width: '280px', height: '280px', border: `1px solid rgba(255,255,255,0.05)`, borderRight: `3px solid ${srv.color}`, borderRadius: '50%', opacity: 0.4 }}
+                    />
+                    <motion.div 
+                       animate={{ scale: [1, 1.05, 1], rotate: [0, 5, -5, 0] }}
+                       transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
+                    >
+                       <srv.icon size={180} color={srv.color} style={{ filter: `drop-shadow(0 0 50px ${srv.color}) drop-shadow(0 0 100px ${srv.color}66)` }} />
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
 
         </div>
       </section>
     </motion.div>
   );
 }
+
