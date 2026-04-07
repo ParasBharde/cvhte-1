@@ -14,7 +14,7 @@ const BENEFITS = [
     desc: 'Only the faulted circuit is de-energised. Adjacent feeders and healthy equipment continue operating without interruption — minimising production impact.',
     metric: '95%',
     metricLabel: 'Fault containment rate',
-    color: '#00b4ff',
+    color: '#0082b4',
   },
   {
     icon: Clock,
@@ -22,7 +22,7 @@ const BENEFITS = [
     desc: 'Real-time CVHET parameter monitoring detects pre-fault conditions and triggers alarms before the fault develops — cutting mean-time-to-repair significantly.',
     metric: '60%',
     metricLabel: 'Reduction in MTTR',
-    color: '#4dd8ff',
+    color: '#b9a15c',
   },
   {
     icon: Zap,
@@ -30,7 +30,7 @@ const BENEFITS = [
     desc: 'Eliminating overcurrent, harmonics, and thermal stress through coordinated protection extends transformer, motor, and cable service life by 2–3×.',
     metric: '3×',
     metricLabel: 'Equipment lifespan gain',
-    color: '#00e98c',
+    color: '#0082b4',
   },
   {
     icon: Flame,
@@ -38,7 +38,7 @@ const BENEFITS = [
     desc: 'Accurate earth fault detection, thermal monitoring, and coordinated overcurrent protection remove the primary ignition pathways for electrical fires.',
     metric: '70%',
     metricLabel: 'Fire risk reduction',
-    color: '#ff9f0a',
+    color: '#b9a15c',
   },
   {
     icon: BarChart2,
@@ -46,7 +46,7 @@ const BENEFITS = [
     desc: 'Harmonic analysis and reactive power monitoring enable targeted filter installation and power factor correction — reducing energy waste and utility penalties.',
     metric: '₹1.2Cr',
     metricLabel: 'Annual savings potential',
-    color: '#a855f7',
+    color: '#0082b4',
   },
   {
     icon: Wrench,
@@ -54,7 +54,7 @@ const BENEFITS = [
     desc: 'Condition-based maintenance informed by CVHET data replaces costly time-based schedules — directing resources only where and when they are needed.',
     metric: '45%',
     metricLabel: 'Maintenance cost reduction',
-    color: '#fb923c',
+    color: '#b9a15c',
   },
 ];
 
@@ -129,8 +129,8 @@ export function ProtectionCoordination() {
           background: 'rgba(0,180,255,0.06)', border: '1px solid rgba(0,180,255,0.2)',
           padding: '5px 14px', marginBottom: '20px',
         }}>
-          <Shield size={12} color="#00b4ff" />
-          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>SYSTEM IMPROVEMENT OUTCOMES</span>
+          <Shield size={12} color="#b9a15c" />
+          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#b9a15c', letterSpacing: '2px' }}>SYSTEM IMPROVEMENT OUTCOMES</span>
         </div>
         <h2 style={{
           fontFamily: 'Orbitron, sans-serif',
@@ -141,7 +141,7 @@ export function ProtectionCoordination() {
           marginBottom: '16px',
         }}>
           PROTECTION COORDINATION<br />
-          <span style={{ color: '#00b4ff' }}>BENEFITS</span>
+          <span style={{ color: '#0082b4' }}>BENEFITS</span>
         </h2>
         <p style={{
           maxWidth: '580px', margin: '0 auto',
@@ -161,7 +161,7 @@ export function ProtectionCoordination() {
         transition: 'opacity 0.8s ease',
       }}>
         <div style={{ position: 'relative', animation: 'electricPulse 3s ease-in-out infinite' }}>
-          <ShieldGlow color="#00b4ff" />
+          <ShieldGlow color="#0082b4" />
           <div style={{
             position: 'absolute', inset: 0,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -170,10 +170,10 @@ export function ProtectionCoordination() {
             <div style={{
               fontFamily: 'Orbitron, sans-serif',
               fontSize: '11px', fontWeight: 700,
-              color: '#00b4ff', letterSpacing: '1px', textAlign: 'center',
+              color: '#0082b4', letterSpacing: '1px', textAlign: 'center',
             }}>
               CVHET<br />
-              <span style={{ fontSize: '9px', color: '#4dd8ff' }}>PROTECTED</span>
+              <span style={{ fontSize: '9px', color: '#b9a15c' }}>PROTECTED</span>
             </div>
           </div>
         </div>

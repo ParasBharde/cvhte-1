@@ -3,11 +3,11 @@ import * as THREE from 'three';
 import { ChevronDown, Zap } from 'lucide-react';
 
 const CVHET_ITEMS = [
-  { letter: 'C', label: 'Current',    color: '#00b4ff' },
-  { letter: 'V', label: 'Voltage',    color: '#4dd8ff' },
-  { letter: 'H', label: 'Harmonics',  color: '#ff9f0a' },
-  { letter: 'E', label: 'Earthing',   color: '#00e98c' },
-  { letter: 'T', label: 'Temperature',color: '#ff6b6b' },
+  { letter: 'C', label: 'Current',    color: '#b9a15c' },
+  { letter: 'V', label: 'Voltage',    color: '#0082b4' },
+  { letter: 'H', label: 'Harmonics',  color: '#b9a15c' },
+  { letter: 'E', label: 'Earthing',   color: '#0082b4' },
+  { letter: 'T', label: 'Temperature',color: '#b9a15c' },
 ];
 
 function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, enabled: boolean) {
@@ -32,7 +32,7 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     const pathLines: THREE.Line[] = [];
 
     const lineMat = new THREE.LineBasicMaterial({
-      color: 0x0055aa,
+      color: 0x0082b4,
       transparent: true,
       opacity: 0.15,
       linewidth: 2,
@@ -74,7 +74,7 @@ function useThreeScene(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     travelGeo.setAttribute('alpha', new THREE.BufferAttribute(travelOpacities, 1));
 
     const travelMat = new THREE.ShaderMaterial({
-      uniforms: { color: { value: new THREE.Color(0x00ffff) } },
+      uniforms: { color: { value: new THREE.Color(0x0082b4) } },
       vertexShader: `
         attribute float alpha;
         varying float vAlpha;
@@ -362,13 +362,13 @@ export function HeroSection() {
 
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
-          border: '1px solid rgba(0,180,255,0.3)',
+          border: '1px solid rgba(0, 130, 180, 0.3)',
           padding: '6px 16px',
           marginBottom: '32px',
-          background: 'rgba(0,180,255,0.06)',
+          background: 'rgba(0, 130, 180, 0.06)',
           animation: 'pulseBorder 3s ease-in-out infinite',
         }}>
-          <Zap size={12} color="#ff9f0a" fill="#ff9f0a" />
+          <Zap size={12} color="#b9a15c" fill="#b9a15c" />
           <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#7ba6c4', letterSpacing: '3px' }}>
             ELECTRICAL BREAKDOWN EXPERT
           </span>
@@ -380,7 +380,7 @@ export function HeroSection() {
           fontWeight: 900,
           letterSpacing: '4px',
           color: '#e8f4fd',
-          textShadow: '0 0 40px rgba(0,180,255,0.3)',
+          textShadow: '0 0 40px rgba(0, 130, 180, 0.3)',
           marginBottom: '8px',
           animation: 'flickerIn 0.8s ease-out forwards',
         }}>
@@ -392,9 +392,9 @@ export function HeroSection() {
           fontSize: 'clamp(14px, 2.5vw, 22px)',
           fontWeight: 600,
           letterSpacing: '6px',
-          color: '#00b4ff',
+          color: '#0082b4',
           marginBottom: '40px',
-          textShadow: '0 0 20px rgba(0,180,255,0.6)',
+          textShadow: '0 0 20px rgba(0, 130, 180, 0.6)',
         }}>
           ADVANCED SYSTEM DIAGNOSTICS
         </div>
@@ -411,7 +411,7 @@ export function HeroSection() {
                 <div style={{
                   width: 'clamp(40px, 5vw, 56px)',
                   height: 'clamp(40px, 5vw, 56px)',
-                  border: `1px solid ${isActive ? item.color : 'rgba(0,180,255,0.2)'}`,
+                  border: `1px solid ${isActive ? item.color : 'rgba(0, 130, 180, 0.2)'}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   background: isActive ? `${item.color}18` : 'transparent',
                   boxShadow: isActive ? `0 0 20px ${item.color}40` : 'none',
@@ -450,12 +450,12 @@ export function HeroSection() {
           marginBottom: '40px',
         }}>
           A comprehensive monitoring and protection coordination framework that diagnoses
-          electrical system failures at their root — reducing industrial breakdowns by up to <strong style={{ color: '#00b4ff' }}>80%</strong>.
+          electrical system failures at their root — reducing industrial breakdowns by up to <strong style={{ color: '#b9a15c', textShadow: '0 0 15px rgba(185,161,92,0.3)' }}>80%</strong>.
         </p>
 
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
           <a href="#breakdowns" style={{
-            background: '#00b4ff',
+            background: '#0082b4',
             color: '#020c1b',
             padding: '14px 32px',
             fontFamily: 'Orbitron, sans-serif',
@@ -464,11 +464,11 @@ export function HeroSection() {
             letterSpacing: '2px',
             textDecoration: 'none',
             display: 'inline-flex', alignItems: 'center', gap: '8px',
-            boxShadow: '0 0 30px rgba(0,180,255,0.4)',
+            boxShadow: '0 0 30px rgba(0, 130, 180, 0.4)',
             transition: 'all 0.3s',
           }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 50px rgba(0,180,255,0.7)'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 30px rgba(0,180,255,0.4)'; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 50px rgba(0, 130, 180, 0.7)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 30px rgba(0, 130, 180, 0.4)'; }}
           >
             <Zap size={14} fill="currentColor" /> EXPLORE SYSTEM
           </a>
@@ -494,7 +494,7 @@ export function HeroSection() {
         <a href="#breakdowns" style={{
           position: 'absolute', bottom: '40px',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px',
-          color: '#00b4ff', textDecoration: 'none',
+          color: '#0082b4', textDecoration: 'none',
           animation: 'scanDown 3s linear infinite', /* Using existing animation for glow, will add bounce in CSS */
           cursor: 'pointer',
           zIndex: 20,
@@ -503,19 +503,19 @@ export function HeroSection() {
         >
           <div style={{
             width: '24px', height: '38px',
-            border: '2px solid rgba(0,180,255,0.5)',
+            border: '2px solid rgba(0, 130, 180, 0.5)',
             borderRadius: '20px',
             display: 'flex', justifyContent: 'center',
             paddingTop: '6px',
-            boxShadow: '0 0 15px rgba(0,180,255,0.2)',
+            boxShadow: '0 0 15px rgba(0, 130, 180, 0.2)',
             background: 'rgba(5, 26, 46, 0.5)',
           }}>
             <div style={{
               width: '3px', height: '8px',
-              background: '#00e98c',
+              background: '#b9a15c',
               borderRadius: '2px',
               animation: 'scrollWheel 1.5s infinite',
-              boxShadow: '0 0 8px #00e98c'
+              boxShadow: '0 0 8px #b9a15c'
             }} />
           </div>
           <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '10px', letterSpacing: '3px', color: '#7ba6c4' }}>DESCEND</span>

@@ -27,10 +27,10 @@ const CHART_DATA = [
 ];
 
 const METRICS = [
-  { icon: TrendingDown, value: 80,  unit: '%',  label: 'Reduction in Breakdowns',     color: '#00e98c', desc: 'Year-on-year decline in unplanned electrical failure events' },
-  { icon: Clock,        value: 55,  unit: '%',  label: 'Less Unplanned Downtime',      color: '#00b4ff', desc: 'Reduction in production hours lost to electrical failures' },
-  { icon: Award,        value: 3,   unit: '×',  label: 'Equipment Lifespan Extended',  color: '#ff9f0a', desc: 'Average extension in service life of protected assets' },
-  { icon: Wrench,       value: 45,  unit: '%',  label: 'Maintenance Cost Reduced',     color: '#a855f7', desc: 'Shift from reactive to condition-based maintenance strategy' },
+  { icon: TrendingDown, value: 80,  unit: '%',  label: 'Reduction in Breakdowns',     color: '#b9a15c', desc: 'Year-on-year decline in unplanned electrical failure events' },
+  { icon: Clock,        value: 55,  unit: '%',  label: 'Less Unplanned Downtime',      color: '#0082b4', desc: 'Reduction in production hours lost to electrical failures' },
+  { icon: Award,        value: 3,   unit: '×',  label: 'Equipment Lifespan Extended',  color: '#b9a15c', desc: 'Average extension in service life of protected assets' },
+  { icon: Wrench,       value: 45,  unit: '%',  label: 'Maintenance Cost Reduced',     color: '#0082b4', desc: 'Shift from reactive to condition-based maintenance strategy' },
 ];
 
 function CustomTooltip({ active, payload, label }: any) {
@@ -38,11 +38,11 @@ function CustomTooltip({ active, payload, label }: any) {
   return (
     <div style={{
       background: '#0a2540',
-      border: '1px solid rgba(0,180,255,0.25)',
+      border: '1px solid rgba(0, 130, 180, 0.25)',
       padding: '12px 16px',
       fontFamily: 'Space Grotesk, sans-serif',
     }}>
-      <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '12px', color: '#00b4ff', marginBottom: '8px' }}>
+      <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '12px', color: '#0082b4', marginBottom: '8px' }}>
         {label}
       </div>
       {payload.map((p: any) => (
@@ -58,10 +58,10 @@ function CustomTooltip({ active, payload, label }: any) {
       ))}
       {payload.length === 2 && (
         <div style={{
-          borderTop: '1px solid rgba(0,180,255,0.1)',
+          borderTop: '1px solid rgba(0, 130, 180, 0.1)',
           marginTop: '8px', paddingTop: '8px',
           fontFamily: 'Orbitron, sans-serif', fontSize: '11px',
-          color: '#00e98c',
+          color: '#b9a15c',
         }}>
           ↓ {Math.round((1 - payload[1].value / payload[0].value) * 100)}% reduction
         </div>
@@ -117,28 +117,28 @@ export function ReductionSection() {
         overflow: 'hidden',
       }}
     >
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        fontFamily: 'Orbitron, sans-serif',
-        fontSize: 'clamp(200px, 30vw, 360px)',
-        fontWeight: 900,
-        color: 'rgba(0,233,140,0.025)',
-        userSelect: 'none', pointerEvents: 'none',
-        letterSpacing: '-20px',
-        whiteSpace: 'nowrap',
-      }}>
-        80%
-      </div>
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          fontFamily: 'Orbitron, sans-serif',
+          fontSize: 'clamp(200px, 30vw, 360px)',
+          fontWeight: 900,
+          color: 'rgba(185, 161, 92, 0.025)',
+          userSelect: 'none', pointerEvents: 'none',
+          letterSpacing: '-20px',
+          whiteSpace: 'nowrap',
+        }}>
+          80%
+        </div>
 
       <div style={{ textAlign: 'center', marginBottom: '70px', position: 'relative' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
-          background: 'rgba(0,233,140,0.08)', border: '1px solid rgba(0,233,140,0.2)',
+          background: 'rgba(185, 161, 92, 0.08)', border: '1px solid rgba(185, 161, 92, 0.2)',
           padding: '5px 14px', marginBottom: '20px',
         }}>
-          <TrendingDown size={12} color="#00e98c" />
-          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00e98c', letterSpacing: '2px' }}>MEASURED RESULTS</span>
+          <TrendingDown size={12} color="#b9a15c" />
+          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#b9a15c', letterSpacing: '2px' }}>MEASURED RESULTS</span>
         </div>
         <h2 style={{
           fontFamily: 'Orbitron, sans-serif',
@@ -148,7 +148,7 @@ export function ReductionSection() {
           letterSpacing: '2px',
           marginBottom: '16px',
         }}>
-          <span style={{ color: '#00e98c', textShadow: '0 0 30px rgba(0,233,140,0.6)' }}>80% REDUCTION</span><br />
+          <span style={{ color: '#b9a15c', textShadow: '0 0 30px rgba(185,161,92,0.6)' }}>80% REDUCTION</span><br />
           IN ELECTRICAL BREAKDOWNS
         </h2>
         <p style={{
@@ -182,8 +182,8 @@ export function ReductionSection() {
             justifyContent: 'center',
             fontFamily: 'Orbitron, sans-serif',
             fontWeight: 900,
-            color: '#00e98c',
-            textShadow: '0 0 60px rgba(0,233,140,0.5)',
+            color: '#b9a15c',
+            textShadow: '0 0 60px rgba(185, 161, 92, 0.5)',
             lineHeight: 1,
             position: 'relative',
             zIndex: 2,
@@ -220,20 +220,20 @@ export function ReductionSection() {
             <path
               d="M 20 170 A 130 130 0 0 1 280 170"
               fill="none"
-              stroke="rgba(0,180,255,0.06)"
+              stroke="rgba(0, 130, 180, 0.06)"
               strokeWidth="2.5"
             />
             <path
               d="M 20 170 A 130 130 0 0 1 280 170"
               fill="none"
-              stroke="#00e98c"
+              stroke="#b9a15c"
               strokeWidth="3.5"
               strokeLinecap="round"
               strokeDasharray="408"
               strokeDashoffset={inView ? 408 - (408 * count / 100) : 408}
               style={{ 
                 transition: 'stroke-dashoffset 2.4s cubic-bezier(0.34, 1.56, 0.64, 1)', 
-                filter: 'drop-shadow(0 0 15px rgba(0,233,140,0.7))' 
+                filter: 'drop-shadow(0 0 15px rgba(185, 161, 92, 0.7))' 
               }}
             />
           </svg>
@@ -242,7 +242,7 @@ export function ReductionSection() {
 
       <div style={{
         background: '#051a2e',
-        border: '1px solid rgba(0,180,255,0.1)',
+        border: '1px solid rgba(0, 130, 180, 0.1)',
         padding: 'clamp(20px, 4vw, 40px)',
         marginBottom: '60px',
         opacity: inView ? 1 : 0,
@@ -302,14 +302,14 @@ export function ReductionSection() {
             />
             <ReferenceLine
               y={14}
-              stroke="rgba(0,233,140,0.2)"
+              stroke="rgba(0, 130, 180, 0.2)"
               strokeDasharray="4 4"
-              label={{ value: 'Avg After', position: 'right', style: { fontFamily: 'Space Grotesk, sans-serif', fontSize: 10, fill: '#00e98c' } }}
+              label={{ value: 'Avg After', position: 'right', style: { fontFamily: 'Space Grotesk, sans-serif', fontSize: 10, fill: '#0082b4' } }}
             />
             <Bar
               dataKey="before"
               fill="#ff3355"
-              opacity={0.75}
+              opacity={0.6}
               radius={[2, 2, 0, 0]}
               isAnimationActive={true}
               animationBegin={inView ? 200 : 9999}
@@ -317,8 +317,8 @@ export function ReductionSection() {
             />
             <Bar
               dataKey="after"
-              fill="#00e98c"
-              opacity={0.85}
+              fill="#0082b4"
+              opacity={0.9}
               radius={[2, 2, 0, 0]}
               isAnimationActive={true}
               animationBegin={inView ? 500 : 9999}

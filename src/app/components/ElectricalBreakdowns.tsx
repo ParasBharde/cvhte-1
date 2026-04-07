@@ -28,15 +28,15 @@ function AnimatedNumber({ target, duration = 1800, inView }: { target: number; d
 const STATS = [
   { icon: AlertTriangle, value: 78,   unit: '%',  label: 'Preventable Failures',      color: '#ff9f0a', desc: 'Of all industrial electrical failures are preventable with proper monitoring' },
   { icon: TrendingDown,  value: 4200, unit: '₹Cr', label: 'Annual Industry Loss',      color: '#ff3355', desc: 'Economic losses annually across Indian industries due to electrical breakdowns' },
-  { icon: Zap,           value: 6,    unit: 'hrs', label: 'Avg Downtime Per Month', color: '#00b4ff', desc: 'Average unplanned downtime caused by electrical breakdown events in a month' },
-  { icon: Activity,      value: 80,   unit: '%',   label: 'Reduction Achievable',      color: '#00e98c', desc: 'Breakdown reduction achievable through CVHET implementation and coordination' },
+  { icon: Zap,           value: 6,    unit: 'hrs', label: 'Avg Downtime Per Month', color: '#0082b4', desc: 'Average unplanned downtime caused by electrical breakdown events in a month' },
+  { icon: Activity,      value: 80,   unit: '%',   label: 'Reduction Achievable',      color: '#b9a15c', desc: 'Breakdown reduction achievable through CVHET implementation and coordination' },
 ];
 
 const BREAKDOWN_TYPES = [
-  { label: 'Current (Overload/Shorts)',  pct: 30, color: '#00b4ff' },
+  { label: 'Current (Overload/Shorts)',  pct: 30, color: '#0082b4' },
   { label: 'Voltage (Surges/Sags)',      pct: 25, color: '#4dd8ff' },
   { label: 'Harmonics (Distortion)',     pct: 20, color: '#ff9f0a' },
-  { label: 'Earthing (Leakage/Ground)',  pct: 15, color: '#00e98c' },
+  { label: 'Earthing (Leakage/Ground)',  pct: 15, color: '#b9a15c' },
   { label: 'Temperature (Overheating)',  pct: 10, color: '#ff6b6b' },
 ];
 
@@ -164,7 +164,7 @@ export function ElectricalBreakdowns() {
               className="card-electric danger"
               style={{
                 background: '#051a2e',
-                border: '1px solid rgba(0,180,255,0.12)',
+                border: '1px solid rgba(0, 130, 180,0.12)',
                 padding: '32px 24px',
                 transition: 'all 0.35s ease',
                 opacity: inView ? 1 : 0,
@@ -222,11 +222,11 @@ export function ElectricalBreakdowns() {
 
       <div id="breakdown-distribution" style={{
         background: '#051a2e',
-        border: '1px solid rgba(0,180,255,0.1)',
+        border: '1px solid rgba(0, 130, 180,0.1)',
         padding: 'clamp(20px, 5vw, 48px)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '36px' }}>
-          <div style={{ width: '3px', height: '24px', background: '#00b4ff', boxShadow: '0 0 10px #00b4ff' }} />
+          <div style={{ width: '3px', height: '24px', background: '#0082b4', boxShadow: '0 0 10px #0082b4' }} />
           <h3 style={{
             fontFamily: 'Orbitron, sans-serif',
             fontSize: '16px',

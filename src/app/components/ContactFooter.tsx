@@ -48,7 +48,7 @@ export function ContactFooter() {
   const inputStyle: React.CSSProperties = {
     width: '100%',
     background: '#020c1b',
-    border: '1px solid rgba(0,180,255,0.15)',
+    border: '1px solid rgba(0, 130, 180, 0.15)',
     padding: '12px 16px',
     fontFamily: 'Space Grotesk, sans-serif',
     fontSize: '14px',
@@ -70,7 +70,7 @@ export function ContactFooter() {
       >
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundImage: 'linear-gradient(rgba(0,180,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,255,0.02) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(0, 130, 180, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 130, 180, 0.02) 1px, transparent 1px)',
           backgroundSize: '50px 50px',
           pointerEvents: 'none',
         }} />
@@ -78,11 +78,11 @@ export function ContactFooter() {
         <div style={{ textAlign: 'center', marginBottom: '70px', position: 'relative' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
-            background: 'rgba(0,180,255,0.06)', border: '1px solid rgba(0,180,255,0.2)',
+            background: 'rgba(185, 161, 92, 0.06)', border: '1px solid rgba(185, 161, 92, 0.2)',
             padding: '5px 14px', marginBottom: '20px',
           }}>
-            <Zap size={12} color="#00b4ff" fill="#00b4ff" />
-            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>ENGAGE WITH CVHET</span>
+            <Zap size={12} color="#b9a15c" fill="#b9a15c" />
+            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#b9a15c', letterSpacing: '2px' }}>ENGAGE WITH CVHET</span>
           </div>
           <h2 style={{
             fontFamily: 'Orbitron, sans-serif',
@@ -93,7 +93,7 @@ export function ContactFooter() {
             marginBottom: '16px',
           }}>
             REQUEST A CVHET<br />
-            <span style={{ color: '#00b4ff' }}>SYSTEM ANALYSIS</span>
+            <span style={{ color: '#0082b4' }}>SYSTEM ANALYSIS</span>
           </h2>
           <p style={{
             maxWidth: '520px', margin: '0 auto',
@@ -117,7 +117,7 @@ export function ContactFooter() {
 
           <div style={{
             background: '#051a2e',
-            border: '1px solid rgba(0,180,255,0.12)',
+            border: '1px solid rgba(0, 130, 180,0.12)',
             padding: 'clamp(28px, 4vw, 48px)',
           }}>
             {sent ? (
@@ -148,7 +148,7 @@ export function ContactFooter() {
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{
                   fontFamily: 'Orbitron, sans-serif',
-                  fontSize: '13px', color: '#00b4ff',
+                  fontSize: '13px', color: '#0082b4',
                   letterSpacing: '2px', marginBottom: '8px',
                 }}>
                   ANALYSIS REQUEST FORM
@@ -163,8 +163,8 @@ export function ContactFooter() {
                       name="name" required value={form.name} onChange={handleChange}
                       placeholder="Rajesh Kumar"
                       style={inputStyle}
-                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.5)')}
-                      onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)')}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.5)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.15)')}
                     />
                   </div>
                   <div>
@@ -175,8 +175,8 @@ export function ContactFooter() {
                       name="email" type="email" required value={form.email} onChange={handleChange}
                       placeholder="rajesh@company.com"
                       style={inputStyle}
-                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.5)')}
-                      onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)')}
+                      onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.5)')}
+                      onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.15)')}
                     />
                   </div>
                 </div>
@@ -189,8 +189,8 @@ export function ContactFooter() {
                     name="company" value={form.company} onChange={handleChange}
                     placeholder="Industrial facility or company name"
                     style={inputStyle}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.5)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.5)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.15)')}
                   />
                 </div>
 
@@ -201,8 +201,8 @@ export function ContactFooter() {
                   <select
                     name="service" value={form.service} onChange={handleChange}
                     style={{ ...inputStyle, cursor: 'pointer' }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.5)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.5)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.15)')}
                   >
                     <option value="" style={{ background: '#051a2e' }}>Select a service...</option>
                     <option value="cvhet-audit" style={{ background: '#051a2e' }}>Full CVHET System Audit</option>
@@ -222,8 +222,8 @@ export function ContactFooter() {
                     name="message" rows={4} value={form.message} onChange={handleChange}
                     placeholder="Describe your current electrical challenges, number of breakdowns per month, installed capacity, etc."
                     style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }}
-                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.5)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)')}
+                    onFocus={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.5)')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0, 130, 180,0.15)')}
                   />
                 </div>
 
@@ -231,7 +231,7 @@ export function ContactFooter() {
                   type="submit"
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-                    background: '#00b4ff',
+                    background: '#0082b4',
                     color: '#020c1b',
                     border: 'none',
                     padding: '14px 32px',
@@ -239,12 +239,12 @@ export function ContactFooter() {
                     fontSize: '12px', fontWeight: 700,
                     letterSpacing: '2px',
                     cursor: 'pointer',
-                    boxShadow: '0 0 30px rgba(0,180,255,0.4)',
+                    boxShadow: '0 0 30px rgba(0, 130, 180,0.4)',
                     transition: 'all 0.3s',
                     marginTop: '4px',
                   }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 50px rgba(0,180,255,0.7)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 30px rgba(0,180,255,0.4)'; }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 50px rgba(0, 130, 180,0.7)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 30px rgba(0, 130, 180,0.4)'; }}
                 >
                   <Send size={14} />
                   TRANSMIT REQUEST
@@ -256,7 +256,7 @@ export function ContactFooter() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
             {[
-              { icon: Phone, label: 'CALL US', value: '+91 9823580555', sub: 'Mon–Sat, 9 AM – 6 PM IST', color: '#00b4ff', href: 'tel:+919823580555' },
+              { icon: Phone, label: 'CALL US', value: '+91 9823580555', sub: 'Mon–Sat, 9 AM – 6 PM IST', color: '#0082b4', href: 'tel:+919823580555' },
               { icon: Mail,  label: 'EMAIL',   value: 'ask@cvhet.com', sub: 'Response within 24 hours', color: '#4dd8ff', href: 'mailto:ask@cvhet.com' },
               { icon: MapPin,label: 'OFFICE',  value: 'Pune, Maharashtra, India', sub: 'Pan-India site visits available', color: '#00e98c' },
             ].map((c, ci) => {
@@ -264,7 +264,7 @@ export function ContactFooter() {
               return (
                 <div key={c.label} style={{
                   background: '#051a2e',
-                  border: '1px solid rgba(0,180,255,0.1)',
+                  border: '1px solid rgba(0, 130, 180,0.1)',
                   padding: '20px 24px',
                   display: 'flex', alignItems: 'center', gap: '16px',
                   opacity: inView ? 1 : 0,
@@ -308,13 +308,13 @@ export function ContactFooter() {
 
             <div style={{
               background: '#051a2e',
-              border: '1px solid rgba(0,180,255,0.1)',
+              border: '1px solid rgba(0, 130, 180,0.1)',
               padding: '24px',
               flex: 1,
             }}>
               <div style={{
                 fontFamily: 'Orbitron, sans-serif',
-                fontSize: '11px', color: '#00b4ff',
+                fontSize: '11px', color: '#0082b4',
                 letterSpacing: '2px', marginBottom: '16px',
               }}>
                 OUR SERVICES
@@ -331,11 +331,11 @@ export function ContactFooter() {
                 <div key={s} style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
                   padding: '8px 0',
-                  borderBottom: si < 6 ? '1px solid rgba(0,180,255,0.05)' : 'none',
+                  borderBottom: si < 6 ? '1px solid rgba(0, 130, 180,0.05)' : 'none',
                 }}>
                   <div style={{
                     width: '5px', height: '5px',
-                    background: '#00b4ff',
+                    background: '#0082b4',
                     flexShrink: 0,
                     animation: `electricPulse ${1.5 + si * 0.2}s ease-in-out infinite`,
                   }} />
@@ -351,7 +351,7 @@ export function ContactFooter() {
 
       <footer style={{
         background: '#010911',
-        borderTop: '1px solid rgba(0,180,255,0.08)',
+        borderTop: '1px solid rgba(0, 130, 180,0.08)',
         padding: '40px clamp(24px, 6vw, 100px)',
       }}>
         <div style={{
@@ -363,7 +363,7 @@ export function ContactFooter() {
             <div style={{
               fontFamily: 'Orbitron, sans-serif',
               fontSize: '18px', fontWeight: 800,
-              color: '#00b4ff', letterSpacing: '3px',
+              color: '#0082b4', letterSpacing: '3px',
               marginBottom: '4px',
             }}>
               CVHET ELECTRICAL BREAKDOWN EXPERT
@@ -381,17 +381,17 @@ export function ContactFooter() {
               <button key={i} style={{
                 width: '36px', height: '36px',
                 background: 'transparent',
-                border: '1px solid rgba(0,180,255,0.15)',
+                border: '1px solid rgba(0, 130, 180,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer', color: '#4a6a84',
                 transition: 'all 0.2s',
               }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,180,255,0.5)';
-                  (e.currentTarget as HTMLElement).style.color = '#00b4ff';
+                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0, 130, 180,0.5)';
+                  (e.currentTarget as HTMLElement).style.color = '#0082b4';
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,180,255,0.15)';
+                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0, 130, 180,0.15)';
                   (e.currentTarget as HTMLElement).style.color = '#4a6a84';
                 }}
               >
@@ -404,7 +404,7 @@ export function ContactFooter() {
         <div style={{
           display: 'flex', flexWrap: 'wrap', gap: '16px 32px',
           marginBottom: '32px',
-          borderBottom: '1px solid rgba(0,180,255,0.06)',
+          borderBottom: '1px solid rgba(0, 130, 180,0.06)',
           paddingBottom: '32px',
         }}>
           {NAV_FOOTER.map(l => (
@@ -413,7 +413,7 @@ export function ContactFooter() {
               fontSize: '13px', color: '#4a6a84',
               textDecoration: 'none', transition: 'color 0.2s',
             }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#00b4ff')}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0082b4')}
               onMouseLeave={e => (e.currentTarget.style.color = '#4a6a84')}
             >
               {l.label}
@@ -434,8 +434,8 @@ export function ContactFooter() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{
               width: '6px', height: '6px', borderRadius: '50%',
-              background: '#00e98c',
-              boxShadow: '0 0 8px #00e98c',
+              background: '#0082b4',
+              boxShadow: '0 0 8px #0082b4',
               animation: 'electricPulse 2s ease-in-out infinite',
             }} />
             <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#4b718e' }}>

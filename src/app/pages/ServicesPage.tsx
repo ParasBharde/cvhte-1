@@ -13,7 +13,7 @@ const SERVICES = [
     title: 'REAL-TIME TELEMETRY',
     short: 'AI-driven grid monitoring.',
     desc: 'We utilize deep learning algorithms to continuously analyze current and voltage waveforms in real-time, detecting micro-fluctuations before they ripple into critical hardware failure.',
-    color: '#00b4ff',
+    color: '#0082b4',
     features: ['24/7 Live Dashboard', 'Sub-millisecond Data Polling', 'Automated Anomaly Alerts']
   },
   {
@@ -40,7 +40,7 @@ const SERVICES = [
     title: 'EARTHING AUDITS',
     short: 'Defend against ground faults.',
     desc: 'A weak earthing system is a lethal single point of failure. We perform comprehensive soil resistivity mapping and equipotential bonding analysis to mathematically bulletproof your facility.',
-    color: '#00e98c',
+    color: '#b9a15c',
     features: ['Soil Resistivity Testing', 'Short-Circuit Defense', 'Human Safety Compliance']
   },
   {
@@ -105,7 +105,7 @@ export function ServicesPage() {
         {/* Fixed Title Header within Pin */}
         <div style={{ width: '100%', textAlign: 'center', marginTop: '120px', zIndex: 10 }}>
           <h1 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(28px, 4vw, 42px)', color: '#e8f4fd', letterSpacing: '4px', margin: 0 }}>
-            INDUSTRIAL <span style={{ color: '#00b4ff', textShadow: '0 0 20px rgba(0,180,255,0.4)' }}>DEFENSE</span> PROTOCOLS
+            INDUSTRIAL <span style={{ color: '#0082b4', textShadow: '0 0 20px rgba(0, 130, 180,0.4)' }}>DEFENSE</span> PROTOCOLS
           </h1>
         </div>
 

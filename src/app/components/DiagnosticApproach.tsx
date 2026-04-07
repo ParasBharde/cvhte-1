@@ -11,7 +11,7 @@ const CVHET_STEPS = [
   {
     letter: 'C',
     parameter: 'Current',
-    color: '#00b4ff',
+    color: '#0082b4',
     measurements: ['RMS current measurement per phase', 'Overcurrent detection (50/51)', 'Earth fault current monitoring (50N/51N)', 'Load unbalance quantification', 'CT ratio verification'],
     tools: 'Clamp meters, power analysers, current transformers',
     insight: 'Identifies overloading, phase asymmetry, and fault current magnitudes that dictate relay pickup settings.',
@@ -35,7 +35,7 @@ const CVHET_STEPS = [
   {
     letter: 'E',
     parameter: 'Earthing',
-    color: '#00e98c',
+    color: '#b9a15c',
     measurements: ['Earth electrode resistance (target <1Ω)', 'Step and touch potential measurement', 'Equipotential bonding continuity', 'Earth fault loop impedance', 'Neutral-to-earth voltage (stray voltage)'],
     tools: 'Fall-of-potential method, earth testers, loop impedance testers',
     insight: 'Validates the earthing system integrity — the last line of defence against electric shock and equipment damage during fault conditions.',
@@ -124,11 +124,11 @@ export function DiagnosticApproach() {
       <div style={{ textAlign: 'center', marginBottom: '70px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
-          background: 'rgba(0,233,140,0.08)', border: '1px solid rgba(0,233,140,0.2)',
+          background: 'rgba(185, 161, 92,0.08)', border: '1px solid rgba(185, 161, 92,0.2)',
           padding: '5px 14px', marginBottom: '20px',
         }}>
-          <Cpu size={12} color="#00e98c" />
-          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00e98c', letterSpacing: '2px' }}>ANALYTICAL METHODOLOGY</span>
+          <Cpu size={12} color="#b9a15c" />
+          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#b9a15c', letterSpacing: '2px' }}>ANALYTICAL METHODOLOGY</span>
         </div>
         <h2 style={{
           fontFamily: 'Orbitron, sans-serif',
@@ -139,7 +139,7 @@ export function DiagnosticApproach() {
           marginBottom: '16px',
         }}>
           CVHET DIAGNOSTIC<br />
-          <span style={{ color: '#00e98c' }}>& ANALYTICAL APPROACH</span>
+          <span style={{ color: '#b9a15c' }}>& ANALYTICAL APPROACH</span>
         </h2>
         <p style={{
           maxWidth: '580px', margin: '0 auto',
@@ -171,7 +171,7 @@ export function DiagnosticApproach() {
                   width: 'clamp(52px, 6vw, 64px)',
                   height: 'clamp(52px, 6vw, 64px)',
                   borderRadius: '50%',
-                  border: `2px solid ${isActive ? s.color : isPast ? s.color + '50' : 'rgba(0,180,255,0.15)'}`,
+                  border: `2px solid ${isActive ? s.color : isPast ? s.color + '50' : 'rgba(0, 130, 180,0.15)'}`,
                   background: isActive ? `${s.color}18` : isPast ? `${s.color}06` : '#020c1b',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   cursor: 'pointer',
@@ -197,7 +197,7 @@ export function DiagnosticApproach() {
                   height: '2px',
                   background: i < activeStep
                     ? `linear-gradient(90deg, ${s.color}, ${CVHET_STEPS[i + 1].color})`
-                    : 'rgba(0,180,255,0.08)',
+                    : 'rgba(0, 130, 180,0.08)',
                   position: 'relative',
                   transition: 'background 0.4s',
                   overflow: 'visible',
@@ -285,7 +285,7 @@ export function DiagnosticApproach() {
 
         <div style={{
           background: '#051a2e',
-          border: '1px solid rgba(0,180,255,0.1)',
+          border: '1px solid rgba(0, 130, 180,0.1)',
           padding: '36px',
         }}>
           <div style={{

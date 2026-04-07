@@ -67,23 +67,23 @@ function ScrollEnergyFlow() {
 
       ctx.clearRect(0, 0, width, height);
 
-      let color = '#00b4ff';
+      let color = '#0082b4';
       let mode = 'flow';
       let amplitude = 4;
 
       if (scrollRatio < 0.15) {
-        color = '#00b4ff';
+        color = '#0082b4';
         mode = 'flow';
       } else if (scrollRatio >= 0.15 && scrollRatio < 0.55) {
-        color = '#ff3355';
+        color = '#ff3355'; // Warning red - keeping for diagnostic severity
         mode = 'short_circuit';
         amplitude = 8;
       } else if (scrollRatio >= 0.55 && scrollRatio < 0.75) {
-        color = '#a855f7';
+        color = '#b9a15c'; // Brand gold
         mode = 'pulse';
         amplitude = 12;
       } else {
-        color = '#00e98c';
+        color = '#0082b4'; // Bright brand blue
         mode = 'perfect';
         amplitude = 2;
       }
