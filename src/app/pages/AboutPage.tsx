@@ -173,6 +173,8 @@ export function AboutPage() {
     return () => clearTimeout(timer);
   }, []);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -213,7 +215,7 @@ export function AboutPage() {
             marginBottom: '24px',
           }}>
             PIONEERING ELECTRICAL <br />
-            <span style={{ color: '#00b4ff', textShadow: '0 0 20px rgba(0, 130, 180,0.4)' }}>DIAGNOSTICS</span>
+            <span style={{ color: '#0082b4', textShadow: '0 0 20px rgba(0, 130, 180, 0.4)' }}>DIAGNOSTICS</span>
           </h1>
           <p style={{
             maxWidth: '700px', margin: '0 auto',
@@ -228,9 +230,9 @@ export function AboutPage() {
 
         {/* Mission and Vision - Electrical Core Hubs */}
         <section style={{ 
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
+          display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(350px, 1fr))', 
           gap: '40px', position: 'relative',
-          padding: '20px'
+          padding: isMobile ? '0' : '20px'
         }}>
           {/* Animated Local Sparking Circuit Background */}
           <LocalSparkingCircuit />
@@ -303,7 +305,7 @@ export function AboutPage() {
           background: 'rgba(5, 26, 46, 0.6)',
           border: '1px solid rgba(0, 180, 255, 0.15)',
           borderRadius: '12px',
-          padding: '40px',
+          padding: isMobile ? '24px 16px' : '40px',
           boxShadow: '0 10px 40px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.02)',
           backdropFilter: 'blur(10px)'
         }}>
@@ -320,8 +322,8 @@ export function AboutPage() {
                     <stop offset="95%" stopColor="#ff3355" stopOpacity={0}/>
                   </linearGradient>
                   <linearGradient id="colorMitigated" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#00e98c" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#00e98c" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#0082b4" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#0082b4" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -332,7 +334,7 @@ export function AboutPage() {
                   itemStyle={{ fontFamily: 'Orbitron, sans-serif' }}
                 />
                 <Area type="monotone" dataKey="anomalies" stroke="#ff3355" strokeWidth={2} fillOpacity={1} fill="url(#colorAnomalies)" />
-                <Area type="monotone" dataKey="mitigated" stroke="#00e98c" strokeWidth={2} fillOpacity={1} fill="url(#colorMitigated)" />
+                <Area type="monotone" dataKey="mitigated" stroke="#0082b4" strokeWidth={2} fillOpacity={1} fill="url(#colorMitigated)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -341,9 +343,9 @@ export function AboutPage() {
         {/* Core Pillars */}
         <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
           {[
-            { icon: Shield, title: 'Proactive Protection', desc: 'Our algorithms detect micro-fluctuations in electrical signatures days before hardware gives out.', color: '#00e98c' },
-            { icon: Cpu, title: 'AI-Driven Analysis', desc: 'Real-time telemetry and deep learning models continuously map the stability of your power grid.', color: '#00b4ff' },
-            { icon: TrendingUp, title: 'Efficiency Maximization', desc: 'By eliminating harmonic distortion, we optimize energy consumption and hardware lifespan.', color: '#a855f7' }
+            { icon: Shield, title: 'Proactive Protection', desc: 'Our algorithms detect micro-fluctuations in electrical signatures days before hardware gives out.', color: '#0082b4' },
+            { icon: Cpu, title: 'AI-Driven Analysis', desc: 'Real-time telemetry and deep learning models continuously map the stability of your power grid.', color: '#b9a15c' },
+            { icon: TrendingUp, title: 'Efficiency Maximization', desc: 'By eliminating harmonic distortion, we optimize energy consumption and hardware lifespan.', color: '#0082b4' }
           ].map((pillar, i) => (
             <div key={i} style={{
               background: 'rgba(5, 26, 46, 0.4)',
@@ -414,23 +416,23 @@ export function AboutPage() {
                  ref={progressLineRef}
                  style={{ 
                    position: 'absolute', top: 0, left: '-1px', width: '4px', height: '0%', 
-                   background: 'linear-gradient(180deg, #00b4ff, #00e98c)', 
-                   boxShadow: '0 0 15px #00e98c', transition: 'height 0.1s ease-out'
+                   background: 'linear-gradient(180deg, #0082b4, #b9a15c)', 
+                   boxShadow: '0 0 15px #b9a15c', transition: 'height 0.1s ease-out'
                  }} 
                />
             </div>
             
             {MILESTONES.map((stone, i) => (
-              <div key={i} className="timeline-node" style={{ display: 'flex', gap: '30px', position: 'relative', zIndex: 1, opacity: 0.3, transform: 'translateX(-30px)', filter: 'blur(2px)', transition: 'all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)' }}>
+              <div key={i} className="timeline-node" style={{ display: 'flex', gap: isMobile ? '16px' : '30px', position: 'relative', zIndex: 1, opacity: 0.3, transform: 'translateX(-30px)', filter: 'blur(2px)', transition: 'all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)' }}>
                 <div className="timeline-circle" style={{ 
-                  width: '60px', height: '60px', borderRadius: '50%', background: '#051a2e', border: '2px solid rgba(0, 130, 180,0.3)', 
+                  width: isMobile ? '50px' : '60px', height: isMobile ? '50px' : '60px', borderRadius: '50%', background: '#051a2e', border: '2px solid rgba(0, 130, 180,0.3)', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                  fontFamily: 'Orbitron, sans-serif', fontSize: '14px', fontWeight: 800, color: 'rgba(0, 130, 180,0.5)',
+                  fontFamily: 'Orbitron, sans-serif', fontSize: isMobile ? '12px' : '14px', fontWeight: 800, color: 'rgba(0, 130, 180,0.5)',
                   boxShadow: '0 0 15px rgba(0, 130, 180,0.1)', transition: 'all 0.4s ease'
                 }}>
                   {stone.year}
                 </div>
-                <div style={{ background: 'rgba(5,26,46,0.3)', padding: '24px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)', flex: 1, boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
+                <div style={{ background: 'rgba(5,26,46,0.3)', padding: isMobile ? '16px' : '24px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)', flex: 1, boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
                   <h4 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '18px', color: '#e8f4fd', marginBottom: '8px' }}>
                     {stone.title}
                   </h4>
