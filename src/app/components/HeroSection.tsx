@@ -301,6 +301,7 @@ export function HeroSection() {
   useThreeScene(canvasRef, isDesktop);
 
   useEffect(() => {
+    if (!isDesktop) return;
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
@@ -314,7 +315,7 @@ export function HeroSection() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isDesktop]);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 200);
@@ -329,7 +330,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      style={{ position: 'relative', height: '100vh', minHeight: '700px', overflow: 'hidden', background: '#020c1b' }}
+      style={{ position: 'relative', height: '100vh', minHeight: isDesktop ? '700px' : '620px', overflow: 'hidden', background: '#020c1b' }}
     >
       {isDesktop && (
         <canvas
@@ -355,8 +356,8 @@ export function HeroSection() {
         ref={contentRef}
         style={{
         position: 'absolute', inset: 0, zIndex: 10,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        padding: '0 24px', textAlign: 'center',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: isDesktop ? 'center' : 'flex-start',
+        padding: isDesktop ? '0 24px' : '100px 24px 60px', textAlign: 'center',
         opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
       }}>
 
@@ -364,7 +365,7 @@ export function HeroSection() {
           display: 'inline-flex', alignItems: 'center', gap: '8px',
           border: '1px solid rgba(0, 130, 180, 0.3)',
           padding: '6px 16px',
-          marginBottom: '32px',
+          marginBottom: 'clamp(20px, 4vh, 32px)',
           background: 'rgba(0, 130, 180, 0.06)',
           animation: 'pulseBorder 3s ease-in-out infinite',
         }}>
@@ -376,30 +377,30 @@ export function HeroSection() {
 
         <div style={{
           fontFamily: 'Orbitron, sans-serif',
-          fontSize: 'clamp(28px, 5vw, 56px)',
+          fontSize: 'clamp(24px, 5vw, 56px)',
           fontWeight: 900,
-          letterSpacing: '4px',
+          letterSpacing: isDesktop ? '4px' : '2px',
           color: '#e8f4fd',
           textShadow: '0 0 40px rgba(0, 130, 180, 0.3)',
           marginBottom: '8px',
           animation: 'flickerIn 0.8s ease-out forwards',
         }}>
-          CVHET ELECTRICAL BREAKDOWN EXPERT
+          {isDesktop ? 'CVHET ELECTRICAL BREAKDOWN EXPERT' : 'CVHET'}
         </div>
 
         <div style={{
           fontFamily: 'Orbitron, sans-serif',
-          fontSize: 'clamp(14px, 2.5vw, 22px)',
+          fontSize: 'clamp(12px, 2.5vw, 22px)',
           fontWeight: 600,
-          letterSpacing: '6px',
+          letterSpacing: isDesktop ? '6px' : '3px',
           color: '#0082b4',
-          marginBottom: '40px',
+          marginBottom: 'clamp(24px, 5vh, 40px)',
           textShadow: '0 0 20px rgba(0, 130, 180, 0.6)',
         }}>
           ADVANCED SYSTEM DIAGNOSTICS
         </div>
 
-        <div style={{ display: 'flex', gap: 'clamp(12px, 2vw, 32px)', marginBottom: '48px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: 'clamp(10px, 2vw, 32px)', marginBottom: 'clamp(32px, 6vh, 48px)', flexWrap: 'wrap', justifyContent: 'center' }}>
           {CVHET_ITEMS.map((item, i) => {
             const isActive = i === cvhetIdx;
             return (
@@ -447,7 +448,7 @@ export function HeroSection() {
           fontSize: 'clamp(14px, 1.8vw, 17px)',
           color: '#7ba6c4',
           lineHeight: 1.7,
-          marginBottom: '40px',
+          marginBottom: 'clamp(24px, 4vh, 40px)',
         }}>
           A comprehensive monitoring and protection coordination framework that diagnoses
           electrical system failures at their root — reducing industrial breakdowns by up to <strong style={{ color: '#b9a15c', textShadow: '0 0 15px rgba(185,161,92,0.3)' }}>80%</strong>.
