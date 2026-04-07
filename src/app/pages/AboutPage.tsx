@@ -51,7 +51,7 @@ function LocalSparkingCircuit() {
     const triggerSpark = () => {
       const startX = Math.random() * w;
       const startY = Math.random() * h;
-      const colors = ['#00b4ff', '#00e98c', '#ffffff'];
+      const colors = ['#0082b4', '#b9a15c', '#ffffff'];
       
       // Create a burst of sparks at a node
       for(let i=0; i< (Math.random() * 5 + 3); i++) {
@@ -144,10 +144,10 @@ export function AboutPage() {
               
               const circle = node.querySelector('.timeline-circle') as HTMLElement;
               if (circle) {
-                circle.style.background = 'rgba(0,233,140,0.15)';
+                circle.style.background = 'rgba(185, 161, 92,0.15)';
                 circle.style.borderColor = '#00e98c';
                 circle.style.color = '#00e98c';
-                circle.style.boxShadow = '0 0 20px rgba(0,233,140,0.5)';
+                circle.style.boxShadow = '0 0 20px rgba(185, 161, 92,0.5)';
                 circle.style.transform = 'scale(1.1)';
               }
             } else {
@@ -158,9 +158,9 @@ export function AboutPage() {
               const circle = node.querySelector('.timeline-circle') as HTMLElement;
               if (circle) {
                 circle.style.background = '#051a2e';
-                circle.style.borderColor = 'rgba(0,180,255,0.3)';
-                circle.style.color = 'rgba(0,180,255,0.5)';
-                circle.style.boxShadow = '0 0 15px rgba(0,180,255,0.1)';
+                circle.style.borderColor = 'rgba(0, 130, 180,0.3)';
+                circle.style.color = 'rgba(0, 130, 180,0.5)';
+                circle.style.boxShadow = '0 0 15px rgba(0, 130, 180,0.1)';
                 circle.style.transform = 'scale(1)';
               }
             }
@@ -198,8 +198,8 @@ export function AboutPage() {
             background: 'rgba(0, 180, 255, 0.08)', border: '1px solid rgba(0, 180, 255, 0.2)',
             padding: '5px 14px', marginBottom: '20px', borderRadius: '4px'
           }}>
-            <Zap size={12} color="#00b4ff" />
-            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>
+            <Zap size={12} color="#b9a15c" />
+            <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#b9a15c', letterSpacing: '2px' }}>
               ABOUT CVHET INTELLIGENCE
             </span>
           </div>
@@ -213,7 +213,7 @@ export function AboutPage() {
             marginBottom: '24px',
           }}>
             PIONEERING ELECTRICAL <br />
-            <span style={{ color: '#00b4ff', textShadow: '0 0 20px rgba(0,180,255,0.4)' }}>DIAGNOSTICS</span>
+            <span style={{ color: '#00b4ff', textShadow: '0 0 20px rgba(0, 130, 180,0.4)' }}>DIAGNOSTICS</span>
           </h1>
           <p style={{
             maxWidth: '700px', margin: '0 auto',
@@ -243,13 +243,13 @@ export function AboutPage() {
             <motion.div 
               animate={{ x: ['0%', '400%'], opacity: [0, 1, 0] }}
               transition={{ repeat: Infinity, duration: 3, ease: 'linear' }}
-              style={{ width: '20%', height: '2px', background: 'linear-gradient(90deg, transparent, #00b4ff, #00e98c, transparent)', boxShadow: '0 0 15px #00e98c' }}
+              style={{ width: '20%', height: '2px', background: 'linear-gradient(90deg, transparent, #0082b4, #b9a15c, transparent)', boxShadow: '0 0 15px #b9a15c' }}
             />
           </div>
 
           {[
-            { icon: Target, title: 'MISSION', desc: 'To completely eradicate unplanned electrical breakdown downtime in critical industrial sectors by diagnosing the root cause before it occurs.', color: '#00b4ff' },
-            { icon: Eye, title: 'VISION', desc: 'To become the global standard in electrical systems intelligence, turning unpredictable power hazards into mathematically predictable, manageable data.', color: '#00e98c' }
+            { icon: Target, title: 'MISSION', desc: 'To completely eradicate unplanned electrical breakdown downtime in critical industrial sectors by diagnosing the root cause before it occurs.', color: '#0082b4' },
+            { icon: Eye, title: 'VISION', desc: 'To become the global standard in electrical systems intelligence, turning unpredictable power hazards into mathematically predictable, manageable data.', color: '#b9a15c' }
           ].map((item, i) => (
             <div key={i} style={{
               position: 'relative',
@@ -328,7 +328,7 @@ export function AboutPage() {
                 <XAxis dataKey="month" stroke="#4a6a84" tick={{ fill: '#7ba6c4', fontSize: 12, fontFamily: 'Space Grotesk' }} />
                 <YAxis stroke="#4a6a84" tick={{ fill: '#7ba6c4', fontSize: 12, fontFamily: 'Space Grotesk' }} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#020c1b', border: '1px solid rgba(0,180,255,0.2)', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: '#020c1b', border: '1px solid rgba(0, 130, 180,0.2)', borderRadius: '8px' }}
                   itemStyle={{ fontFamily: 'Orbitron, sans-serif' }}
                 />
                 <Area type="monotone" dataKey="anomalies" stroke="#ff3355" strokeWidth={2} fillOpacity={1} fill="url(#colorAnomalies)" />
@@ -381,7 +381,7 @@ export function AboutPage() {
         </section>
 
         {/* Impact Stats */}
-        <section style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'space-between', padding: '40px 0', borderTop: '1px solid rgba(0,180,255,0.1)', borderBottom: '1px solid rgba(0,180,255,0.1)' }}>
+        <section style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'space-between', padding: '40px 0', borderTop: '1px solid rgba(0, 130, 180,0.1)', borderBottom: '1px solid rgba(0, 130, 180,0.1)' }}>
           {[
             { metric: '150+', label: 'Facilities Protected', icon: Globe },
             { metric: '12,000+', label: 'Anomalies Detected', icon: Activity },
@@ -389,7 +389,7 @@ export function AboutPage() {
             { metric: '₹420Cr', label: 'Capital Protected', icon: Award },
           ].map((stat, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '1 1 200px' }}>
-              <stat.icon size={32} color="#00b4ff" style={{ opacity: 0.8 }} />
+              <stat.icon size={32} color="#0082b4" style={{ opacity: 0.8 }} />
               <div>
                 <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '28px', fontWeight: 800, color: '#e8f4fd', textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>
                   {stat.metric}
@@ -405,10 +405,10 @@ export function AboutPage() {
         {/* Company Journey / Timeline */}
         <section id="about-timeline-section" ref={timelineRef} style={{ padding: '60px 0' }}>
           <h3 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '26px', color: '#e8f4fd', marginBottom: '60px', textAlign: 'center' }}>
-            THE CVHET <span style={{ color: '#00e98c' }}>JOURNEY</span>
+            THE CVHET <span style={{ color: '#b9a15c' }}>JOURNEY</span>
           </h3>
           <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '50px' }}>
-            <div style={{ position: 'absolute', top: 0, bottom: 0, left: '30px', width: '2px', background: 'rgba(0,180,255,0.1)' }}>
+            <div style={{ position: 'absolute', top: 0, bottom: 0, left: '30px', width: '2px', background: 'rgba(0, 130, 180,0.1)' }}>
                {/* Growing Progress Beam */}
                <div 
                  ref={progressLineRef}
@@ -423,10 +423,10 @@ export function AboutPage() {
             {MILESTONES.map((stone, i) => (
               <div key={i} className="timeline-node" style={{ display: 'flex', gap: '30px', position: 'relative', zIndex: 1, opacity: 0.3, transform: 'translateX(-30px)', filter: 'blur(2px)', transition: 'all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)' }}>
                 <div className="timeline-circle" style={{ 
-                  width: '60px', height: '60px', borderRadius: '50%', background: '#051a2e', border: '2px solid rgba(0,180,255,0.3)', 
+                  width: '60px', height: '60px', borderRadius: '50%', background: '#051a2e', border: '2px solid rgba(0, 130, 180,0.3)', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                  fontFamily: 'Orbitron, sans-serif', fontSize: '14px', fontWeight: 800, color: 'rgba(0,180,255,0.5)',
-                  boxShadow: '0 0 15px rgba(0,180,255,0.1)', transition: 'all 0.4s ease'
+                  fontFamily: 'Orbitron, sans-serif', fontSize: '14px', fontWeight: 800, color: 'rgba(0, 130, 180,0.5)',
+                  boxShadow: '0 0 15px rgba(0, 130, 180,0.1)', transition: 'all 0.4s ease'
                 }}>
                   {stone.year}
                 </div>

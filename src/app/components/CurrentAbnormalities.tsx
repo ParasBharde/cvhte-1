@@ -12,7 +12,7 @@ const WAVEFORM_TYPES = [
     id: 'normal',
     label: 'Normal Signal',
     shortLabel: 'NORMAL',
-    color: '#00e98c',
+    color: '#b9a15c',
     description: 'Ideal sinusoidal AC waveform — clean, symmetric, with uniform amplitude and frequency. This is the target state for all parameters.',
     risk: 0,
     draw: (x: number, t: number, w: number, _h: number) => {
@@ -109,7 +109,7 @@ function WaveformCanvas({ typeId, color, draw }: {
       ctx.fillStyle = '#020c1b';
       ctx.fillRect(0, 0, W, H);
 
-      ctx.strokeStyle = 'rgba(0,180,255,0.06)';
+      ctx.strokeStyle = 'rgba(0, 130, 180,0.06)';
       ctx.lineWidth = 1;
       for (let gx = 0; gx <= W; gx += W / 8) {
         ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
@@ -118,7 +118,7 @@ function WaveformCanvas({ typeId, color, draw }: {
         ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
       }
 
-      ctx.strokeStyle = 'rgba(0,180,255,0.15)';
+      ctx.strokeStyle = 'rgba(0, 130, 180,0.15)';
       ctx.setLineDash([4, 6]);
       ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
       ctx.setLineDash([]);
@@ -187,7 +187,7 @@ function RiskMeter({ risk, color }: { risk: number; color: string }) {
       <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.06)', position: 'relative' }}>
         <div style={{
           position: 'absolute', left: 0, top: 0, height: '100%',
-          background: `linear-gradient(90deg, #00e98c, ${color})`,
+          background: `linear-gradient(90deg, #b9a15c, ${color})`,
           boxShadow: `0 0 8px ${color}80`,
           width: `${displayed}%`,
           transition: 'width 1s ease',
@@ -241,11 +241,11 @@ export function CurrentAbnormalities() {
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
-          background: 'rgba(0,180,255,0.06)', border: '1px solid rgba(0,180,255,0.2)',
+          background: 'rgba(0, 130, 180,0.06)', border: '1px solid rgba(0, 130, 180,0.2)',
           padding: '5px 14px', marginBottom: '20px',
         }}>
-          <Activity size={12} color="#00b4ff" />
-          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#00b4ff', letterSpacing: '2px' }}>LIVE SIGNAL ANALYSIS</span>
+          <Activity size={12} color="#0082b4" />
+          <span style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '11px', color: '#0082b4', letterSpacing: '2px' }}>LIVE SIGNAL ANALYSIS</span>
         </div>
         <h2 style={{
           fontFamily: 'Orbitron, sans-serif',
@@ -256,7 +256,7 @@ export function CurrentAbnormalities() {
           marginBottom: '16px',
         }}>
           CURRENT ABNORMALITIES<br />
-          <span style={{ color: '#00b4ff' }}>THREATENING YOUR SYSTEM</span>
+          <span style={{ color: '#0082b4' }}>THREATENING YOUR SYSTEM</span>
         </h2>
         <p style={{
           maxWidth: '580px', margin: '0 auto',
@@ -282,7 +282,7 @@ export function CurrentAbnormalities() {
               onClick={() => setSelected(i)}
               style={{
                 background:   isSel ? `${wt.color}18` : 'transparent',
-                border:       `1px solid ${isSel ? wt.color : 'rgba(0,180,255,0.15)'}`,
+                border:       `1px solid ${isSel ? wt.color : 'rgba(0, 130, 180,0.15)'}`,
                 color:        isSel ? wt.color : '#7ba6c4',
                 padding:      '8px 20px',
                 fontFamily:   'Orbitron, sans-serif',
@@ -350,7 +350,7 @@ export function CurrentAbnormalities() {
 
         <div style={{
           background: '#051a2e',
-          border: '1px solid rgba(0,180,255,0.1)',
+          border: '1px solid rgba(0, 130, 180,0.1)',
           padding: '32px',
           display: 'flex', flexDirection: 'column', gap: '24px',
         }}>
@@ -369,7 +369,7 @@ export function CurrentAbnormalities() {
             </p>
           </div>
 
-          <div style={{ borderTop: '1px solid rgba(0,180,255,0.08)', paddingTop: '24px' }}>
+          <div style={{ borderTop: '1px solid rgba(0, 130, 180,0.08)', paddingTop: '24px' }}>
             <div style={{
               fontFamily: 'Orbitron, sans-serif', fontSize: '11px',
               color: '#4a6a84', letterSpacing: '2px', marginBottom: '14px',
@@ -427,7 +427,7 @@ export function CurrentAbnormalities() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
-        <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,180,255,0.4), transparent)' }} />
+        <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0, 130, 180,0.4), transparent)' }} />
       </div>
     </section>
   );

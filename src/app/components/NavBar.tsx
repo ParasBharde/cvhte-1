@@ -3,13 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 
 const NAV_LINKS = [
-  { href: '/about',        label: 'About CVHET' },
-  { href: '/services',     label: 'Services' },
   { href: '/#breakdowns',  label: 'Breakdowns' },
   { href: '/#symptoms',    label: 'Symptoms' },
   { href: '/#abnormalities',label: 'Abnormalities' },
   { href: '/#diagnostic',  label: 'CVHET Diagnostic' },
   { href: '/#reduction',   label: 'Results' },
+  { href: '/about',        label: 'About' },
+  { href: '/services',     label: 'Services' },
   { href: '/#contact',     label: 'Contact' },
 ];
 
@@ -50,33 +50,37 @@ export function NavBar() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: scrolled ? 'rgba(2,12,27,0.96)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(0,180,255,0.1)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(0,130,180,0.1)' : 'none',
         transition: 'all 0.4s ease',
       }}
     >
       <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
         <div style={{
-          background: '#ffffff',
+          background: 'rgba(5, 26, 46, 0.6)',
+          backdropFilter: 'blur(8px)',
           padding: '6px',
-          borderRadius: '6px',
+          borderRadius: '8px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 0 20px rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(0, 130, 180, 0.2)',
+          boxShadow: '0 0 15px rgba(0, 130, 180, 0.1)',
           transition: 'all 0.3s ease',
           flexShrink: 0,
         }}
           onMouseEnter={e => {
             e.currentTarget.style.transform = 'scale(1.04)';
-            e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.3)';
+            e.currentTarget.style.boxShadow = '0 0 25px rgba(0, 130, 180, 0.3)';
+            e.currentTarget.style.borderColor = 'rgba(0, 130, 180, 0.5)';
           }}
           onMouseLeave={e => {
             e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.15)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 130, 180, 0.1)';
+            e.currentTarget.style.borderColor = 'rgba(0, 130, 180, 0.2)';
           }}
         >
           <img
-            src="/CVHET-1.png"
+            src="/CVHET_Logo_1.png"
             alt="CVHET Logo"
             style={{
               height: '44px',
@@ -87,7 +91,7 @@ export function NavBar() {
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-          <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '18px', fontWeight: 800, color: '#00b4ff', lineHeight: 1.1, letterSpacing: '3px' }}>
+          <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '18px', fontWeight: 800, color: '#0082b4', lineHeight: 1.1, letterSpacing: '3px' }}>
             CVHET
           </div>
           <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '10px', color: '#7ba6c4', letterSpacing: '1.5px', fontWeight: 600, textTransform: 'uppercase' }}>
@@ -106,7 +110,7 @@ export function NavBar() {
               key={link.href}
               to={link.href}
               style={{
-                color: isActive ? '#00b4ff' : '#7ba6c4',
+                color: isActive ? '#0082b4' : '#7ba6c4',
                 textDecoration: 'none',
                 fontSize: '13px',
                 fontFamily: 'Space Grotesk, sans-serif',
@@ -116,14 +120,14 @@ export function NavBar() {
                 position: 'relative',
                 paddingBottom: '2px',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#00b4ff')}
-              onMouseLeave={e => (e.currentTarget.style.color = isActive ? '#00b4ff' : '#7ba6c4')}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0082b4')}
+              onMouseLeave={e => (e.currentTarget.style.color = isActive ? '#0082b4' : '#7ba6c4')}
             >
               {link.label}
               {isActive && (
                 <span style={{
                   position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '1px',
-                  background: '#00b4ff', boxShadow: '0 0 6px #00b4ff',
+                  background: '#0082b4', boxShadow: '0 0 6px #0082b4',
                 }} />
               )}
             </Link>
@@ -137,8 +141,8 @@ export function NavBar() {
           style={{
             display: 'flex', alignItems: 'center', gap: '6px',
             background: 'transparent',
-            border: '1px solid #00b4ff',
-            color: '#00b4ff',
+            border: '1px solid #0082b4',
+            color: '#0082b4',
             padding: '8px 18px',
             fontFamily: 'Orbitron, sans-serif',
             fontSize: '11px',

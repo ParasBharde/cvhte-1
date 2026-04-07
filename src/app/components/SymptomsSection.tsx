@@ -57,7 +57,7 @@ const SYMPTOMS = [
     icon: Volume2,
     title: 'Electrical Noise & Interference',
     severity: 'MEDIUM',
-    color: '#00b4ff',
+    color: '#0082b4',
     description:
       'Harmonic distortion and poor earthing introducing electromagnetic interference that disrupts communication networks, PLC signals, and instrumentation accuracy.',
     indicators: ['Instrumentation drift', 'Communication errors', 'PLC signal noise'],
@@ -152,7 +152,7 @@ export function SymptomsSection() {
               onMouseLeave={() => setHovered(null)}
               style={{
                 background: isHovered ? '#0a2540' : '#051a2e',
-                border: `1px solid ${isHovered ? symptom.color + '60' : 'rgba(0,180,255,0.1)'}`,
+                border: `1px solid ${isHovered ? symptom.color + '60' : 'rgba(0, 130, 180,0.1)'}`,
                 padding: '28px',
                 cursor: 'default',
                 transition: 'all 0.35s ease',
@@ -225,8 +225,8 @@ export function SymptomsSection() {
                     fontFamily: 'Space Grotesk, sans-serif',
                     fontSize: '11px',
                     color: '#4a6a84',
-                    background: 'rgba(0,180,255,0.05)',
-                    border: '1px solid rgba(0,180,255,0.1)',
+                    background: 'rgba(0, 130, 180,0.05)',
+                    border: '1px solid rgba(0, 130, 180,0.1)',
                     padding: '3px 8px',
                   }}>
                     {ind}

@@ -77,7 +77,7 @@ const WEAKNESSES = [
     icon: Layers,
     title: 'Single-Level Protection Only',
     subtitle: 'Flat protection hierarchy',
-    color: '#00b4ff',
+    color: '#0082b4',
     description:
       'Systems with only main breaker protection have no redundancy. A single relay failure or misoperation results in unprotected operation, risking catastrophic equipment damage and fire.',
     impact: 'Zero redundancy on protection failure',
@@ -276,7 +276,7 @@ export function ProtectionWeaknesses() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '60px' }}>
-        <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0,180,255,0.4), transparent)' }} />
+        <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(0, 130, 180,0.4), transparent)' }} />
       </div>
     </section>
   );
