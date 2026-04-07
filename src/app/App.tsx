@@ -272,6 +272,10 @@ function ArcBackground() {
 export default function App() {
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div style={{ background: '#020c1b', color: '#e8f4fd', overflowX: 'hidden', minHeight: '100vh' }}>
       <ScrollEnergyFlow />

@@ -3,13 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 
 const NAV_LINKS = [
-  { href: '/about',        label: 'About CVHET' },
-  { href: '/services',     label: 'Services' },
   { href: '/#breakdowns',  label: 'Breakdowns' },
   { href: '/#symptoms',    label: 'Symptoms' },
   { href: '/#abnormalities',label: 'Abnormalities' },
   { href: '/#diagnostic',  label: 'CVHET Diagnostic' },
   { href: '/#reduction',   label: 'Results' },
+  { href: '/about',        label: 'About' },
+  { href: '/services',     label: 'Services' },
   { href: '/#contact',     label: 'Contact' },
 ];
 

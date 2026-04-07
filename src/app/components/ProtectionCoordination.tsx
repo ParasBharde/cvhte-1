@@ -44,7 +44,7 @@ const BENEFITS = [
     icon: BarChart2,
     title: 'Improved Power Quality',
     desc: 'Harmonic analysis and reactive power monitoring enable targeted filter installation and power factor correction — reducing energy waste and utility penalties.',
-    metric: '₹Cr',
+    metric: '₹1.2Cr',
     metricLabel: 'Annual savings potential',
     color: '#a855f7',
   },

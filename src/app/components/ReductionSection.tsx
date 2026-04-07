@@ -165,51 +165,79 @@ export function ReductionSection() {
       <div
         ref={counterRef}
         style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center',
-          marginBottom: '70px', position: 'relative',
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '80px', 
+          position: 'relative',
+          padding: '20px 0',
         }}
       >
-        <div style={{
-          display: 'flex', alignItems: 'flex-start',
-          fontFamily: 'Orbitron, sans-serif',
-          fontWeight: 900,
-          color: '#00e98c',
-          textShadow: '0 0 60px rgba(0,233,140,0.5)',
-          lineHeight: 1,
-        }}>
-          <span style={{ fontSize: 'clamp(80px, 15vw, 160px)' }}>{count}</span>
-          <span style={{ fontSize: 'clamp(40px, 8vw, 80px)', marginTop: '0.15em' }}>%</span>
-        </div>
-        <div style={{
-          fontFamily: 'Orbitron, sans-serif',
-          fontSize: 'clamp(12px, 1.5vw, 16px)',
-          color: '#7ba6c4', letterSpacing: '4px',
-          marginTop: '8px',
-        }}>
-          BREAKDOWN REDUCTION
-        </div>
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          
+          <div style={{
+            display: 'flex', 
+            alignItems: 'baseline',
+            justifyContent: 'center',
+            fontFamily: 'Orbitron, sans-serif',
+            fontWeight: 900,
+            color: '#00e98c',
+            textShadow: '0 0 60px rgba(0,233,140,0.5)',
+            lineHeight: 1,
+            position: 'relative',
+            zIndex: 2,
+          }}>
+            <span style={{ fontSize: 'clamp(70px, 14vw, 150px)', letterSpacing: '0px' }}>{count}</span>
+            <span style={{ fontSize: 'clamp(35px, 7vw, 75px)', marginLeft: '6px', opacity: 0.9 }}>%</span>
+          </div>
+          
+          <div style={{
+            fontFamily: 'Orbitron, sans-serif',
+            fontSize: 'clamp(10px, 1.2vw, 13px)',
+            color: '#7ba6c4', 
+            letterSpacing: '5px',
+            marginTop: '0px',
+            opacity: 0.8,
+            textTransform: 'uppercase',
+          }}>
+            Total Reduction
+          </div>
 
-        <svg
-          style={{ position: 'absolute', top: '-20px', pointerEvents: 'none' }}
-          width="300" height="180" viewBox="0 0 300 180"
-        >
-          <path
-            d="M 20 160 A 130 130 0 0 1 280 160"
-            fill="none"
-            stroke="rgba(0,180,255,0.08)"
-            strokeWidth="4"
-          />
-          <path
-            d="M 20 160 A 130 130 0 0 1 280 160"
-            fill="none"
-            stroke="#00e98c"
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeDasharray="408"
-            strokeDashoffset={inView ? 408 - (408 * count / 100) : 408}
-            style={{ transition: 'stroke-dashoffset 2.2s ease', filter: 'drop-shadow(0 0 8px rgba(0,233,140,0.6))' }}
-          />
-        </svg>
+          <svg
+            style={{ 
+              position: 'absolute', 
+              top: '45%', 
+              left: '50%', 
+              transform: 'translate(-50%, -55%)', 
+              pointerEvents: 'none',
+              width: 'clamp(280px, 48vw, 440px)',
+              height: 'auto',
+              zIndex: 1,
+            }}
+            viewBox="0 0 300 200"
+          >
+            <path
+              d="M 20 170 A 130 130 0 0 1 280 170"
+              fill="none"
+              stroke="rgba(0,180,255,0.06)"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M 20 170 A 130 130 0 0 1 280 170"
+              fill="none"
+              stroke="#00e98c"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              strokeDasharray="408"
+              strokeDashoffset={inView ? 408 - (408 * count / 100) : 408}
+              style={{ 
+                transition: 'stroke-dashoffset 2.4s cubic-bezier(0.34, 1.56, 0.64, 1)', 
+                filter: 'drop-shadow(0 0 15px rgba(0,233,140,0.7))' 
+              }}
+            />
+          </svg>
+        </div>
       </div>
 
       <div style={{

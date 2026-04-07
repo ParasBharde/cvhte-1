@@ -427,7 +427,7 @@ export function ContactFooter() {
         }}>
           <p style={{
             fontFamily: 'Space Grotesk, sans-serif',
-            fontSize: '12px', color: '#2a4a64',
+            fontSize: '12px', color: '#4b718e',
           }}>
             © 2026 CVHET Electrical Breakdown Expert. All rights reserved. CVHET is a proprietary electrical diagnostic system.
           </p>
@@ -438,7 +438,7 @@ export function ContactFooter() {
               boxShadow: '0 0 8px #00e98c',
               animation: 'electricPulse 2s ease-in-out infinite',
             }} />
-            <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#2a4a64' }}>
+            <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '12px', color: '#4b718e' }}>
               System Online
             </span>
           </div>
