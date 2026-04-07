@@ -20,6 +20,13 @@ export function NavBar() {
   const [menuOpen, setMenuOpen]   = useState(false);
   const [activeSection, setActive] = useState('');
   const location = useLocation();
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -37,9 +44,10 @@ export function NavBar() {
         }
       }
     };
+    onScroll(); // initial
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <nav
@@ -91,12 +99,14 @@ export function NavBar() {
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-          <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '18px', fontWeight: 800, color: '#0082b4', lineHeight: 1.1, letterSpacing: '3px' }}>
+          <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: isMobile ? '16px' : '18px', fontWeight: 800, color: '#0082b4', lineHeight: 1.1, letterSpacing: isMobile ? '2px' : '3px' }}>
             CVHET
           </div>
-          <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '10px', color: '#7ba6c4', letterSpacing: '1.5px', fontWeight: 600, textTransform: 'uppercase' }}>
-            Electrical Breakdown Expert
-          </div>
+          {!isMobile && (
+            <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '10px', color: '#7ba6c4', letterSpacing: '1.5px', fontWeight: 600, textTransform: 'uppercase' }}>
+              Electrical Breakdown Expert
+            </div>
+          )}
         </div>
       </Link>
 
